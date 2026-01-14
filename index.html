@@ -14,6 +14,9 @@
     </script>
     <script src="assets/js/language.js">
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <style>
         @keyframes blob {
             0% {
@@ -106,47 +109,40 @@
             <div class="hidden lg:flex items-center gap-[50px] text-base font-medium leading-6"><a href="index.html" class="text-white hover:text-green-400 transition" data-i18n="home">Trang chủ</a>
                 <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & FX</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a>
                 <div class="relative group">
-                    <a href="fund.html"
-                    class="text-white hover:text-green-400 transition flex items-center gap-1">
+                    <a href="fund.html" class="text-white hover:text-green-400 transition flex items-center gap-1">
                         <span data-i18n="fund">Quản lý Quỹ</span>
                         <i data-lucide="chevron-down" class="w-4 h-4"></i>
                     </a>
 
                     <!-- Sub menu -->
-                    <div
-                        class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg
+                    <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg
                             opacity-0 invisible group-hover:opacity-100 group-hover:visible
                             transition-all duration-200">
-                        <a href="#"
-                        class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-500"
-                        data-i18n="fund_cross_border">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-500" data-i18n="fund_cross_border">
                             Cross border payment
                         </a>
 
-                        <a href="#"
-                        class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-500"
-                        data-i18n="fund_management">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-500" data-i18n="fund_management">
                             Fund Management
                         </a>
 
-                        <a href="#"
-                        class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-500"
-                        data-i18n="fund_consulting">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-500" data-i18n="fund_consulting">
                             Consulting
                         </a>
                     </div>
                 </div>
 
-                <a href="about.html" class="text-white hover:text-green-400 transition"data-i18n="about">Về Remex</a>
+                <a href="about.html" class="text-white hover:text-green-400 transition" data-i18n="about">Về Remex</a>
                 <a href="support.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="support">Hỗ trợ</span></a>
             </div>
             <!-- Right Side: Language + Buttons -->
             <div class="flex items-center gap-4">
                 <!-- Language Selector Dropdown -->
                 <div class="hidden md:block relative group">
-                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector>
-            <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
-          </button>
+                    <!-- <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector> -->
+                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-white/30" data-lang-selector>
+                        <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
                     <!-- Dropdown Menu -->
                     <div class="hidden absolute right-0 mt-0 w-48 bg-[#003746] border border-white/20 rounded-lg shadow-lg group-hover:block z-50">
                         <button onclick="setLanguage('vi')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
@@ -161,12 +157,12 @@
                     </div>
                 </div>
                 <!-- Buttons -->
-                <a href="#" class="text-white hidden md:block px-3 py-[6px] rounded-[12px] font-medium hover:bg-white/10 transition" data-i18n="login">
+                <!-- <a href="#" class="text-white hidden md:block px-3 py-[6px] rounded-[12px] font-medium hover:bg-white/10 transition" data-i18n="login">
                 Đăng nhập</a><a href="#" class="inline-flex items-center gap-2 h-[36px] px-3 py-[6px] rounded-lg bg-[#00CC61] hover:bg-[#00b857] text-white text-base font-medium transition" data-i18n="signup">
                 Đăng ký
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"  />
-                </svg></a>
+                </svg></a> -->
                 <!-- Mobile Hamburger -->
                 <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,20 +196,16 @@
     </nav>
     <!-- ==================== HERO SECTION ==================== -->
     <section id="heroSection" class="bg-[#004050] relative overflow-hidden pt-[7rem] pb-[4rem] md:pt-[10rem] md:pb-[6rem]">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <!-- Text & Buttons -->
             <div>
-                <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
-                    <span class="inline sm:block" data-i18n="bridgeTitle">Cầu nối tài chính</span>
-                    <span class="inline sm:block" data-i18n="bridgeSubtitle1">cho cộng đồng</span>
-                    <span class="inline sm:block" data-i18n="bridgeSubtitle2">người Việt toàn cầu</span>
+                <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 font-medium">
+                    <span class="inline sm:block" data-i18n="bridgeTitle">Cầu nối tài chính cho cộng đồng người Việt toàn cầu</span>
                 </h1>
 
 
                 <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
-                    <span data-i18n="paymentSolution">Giải pháp thanh toán xuyên biên giới, kiều hối</span>
-                    <span class="inline sm:block" data-i18n="paymentDescription">và tư vấn tài chính chiến lược – an toàn, nhanh chóng</span>
-                    <span class="inline sm:block" data-i18n="paymentTransparent">và minh bạch.</span>
+                    <span data-i18n="paymentSolution">Giải pháp thanh toán xuyên biên giới, kiều hối và tư vấn tài chính chiến lược – an toàn, nhanh chóng và minh bạch.</span>
                 </p>
                 <div class="flex flex-wrap gap-4 mb-10">
                     <button class="inline-flex items-center justify-center h-[48px] px-6 py-3 rounded-lg bg-[#00CC61] hover:bg-green-600 text-white text-base font-medium transition" data-i18n="exploreBtn">
@@ -229,10 +221,10 @@
             <div class="relative w-full flex justify-center mt-12 lg:mt-0">
                 <!-- Ảnh nền full -->
                 <!-- Desktop -->
-                <img src="./assets/images/Group 46.png" alt="" class="hidden md:block relative z-30 w-full h-auto transform scale-150">
+                <img src="./assets/images/girl-des.png" alt="" class="hidden md:block relative z-30 w-full h-auto transform scale-150">
 
                 <!-- Mobile -->
-                <img src="./assets/images/girl-banner.png" alt="" class="block md:hidden relative z-30 w-full h-auto transform scale-150">
+                <img src="./assets/images/girl-mobi.png" alt="" class="block md:hidden relative z-30 w-full h-auto transform scale-150">
             </div>
         </div>
     </section>
@@ -246,19 +238,76 @@
                 </h2>
                 <div class="divider">
                 </div>
+
             </div>
             <!-- Logo ngân hàng -->
-            <div class="grid grid-cols-3 md:grid-cols-7 gap-8 md:gap-12 items-center justify-items-center mb-16">
-                <img src="./assets/images/logo/MBV.png" alt="MBV" class="h-10 md:h-12 object-contain">
-                <img src="./assets/images/logo/BIDV.png" alt="BIDV" class="h-10 md:h-12 object-contain">
-                <img src="./assets/images/logo/MB.png" alt="MB Bank" class="h-10 md:h-12 object-contain">
-                <img src="./assets/images/logo/Techcombank.png" alt="Techcombank" class="h-10 md:h-12 object-contain">
-                <img src="./assets/images/logo/Vietcombank.png" alt="Vietcombank" class="h-10 md:h-12 object-contain">
-                <img src="./assets/images/logo/Vietinbank.png" alt="VietinBank" class="h-10 md:h-12 object-contain">
-                <img src="./assets/images/logo/VPBank.png" alt="VPBank" class="h-10 md:h-12 object-contain">
+            <div class="bg-[#F4FBF6] p-10 mb-16">
+                <p class="mx-auto mb-12 max-w-4xl text-center font-inter font-medium text-[18px] leading-[28px] text-[#495057]">
+                    Payment, custody, and transaction-specific dialogue partners.
+                </p>
+
+                <!-- Mobile carousel -->
+                <div class="md:hidden relative">
+                    <div class="overflow-hidden">
+                        <div id="logoTrack" class="flex transition-transform duration-300 ease-in-out">
+                            <!-- item -->
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/MBV.png" class="h-10 object-contain">
+                            </div>
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/BIDV.png" class="h-10 object-contain">
+                            </div>
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/MB.png" class="h-10 object-contain">
+                            </div>
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/Techcombank.png" class="h-10 object-contain">
+                            </div>
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/Vietcombank.png" class="h-10 object-contain">
+                            </div>
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/Vietinbank.png" class="h-10 object-contain">
+                            </div>
+                            <div class="w-1/2 flex justify-center shrink-0">
+                                <img src="./assets/images/logo/VPBank.png" class="h-10 object-contain">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <button id="prevBtn" class="absolute top-1/2 -translate-y-1/2 p-2">
+                        <img src="./assets/images/icon/arrow-left.png"
+                            alt="Previous"
+                            class="w-6 h-6 object-contain">
+                    </button>
+
+                    <button id="nextBtn" class="absolute top-1/2 -translate-y-1/2 p-2">
+                        <img src="./assets/images/icon/arrow-right.png"
+                            alt="Next"
+                            class="w-6 h-6 object-contain">
+                    </button>
+
+                </div>
+
+                <!-- Desktop grid giữ nguyên -->
+                <div class="hidden md:grid grid-cols-7 gap-12 items-center justify-items-center">
+                    <img src="./assets/images/logo/MBV.png" class="h-12 object-contain">
+                    <img src="./assets/images/logo/BIDV.png" class="h-12 object-contain">
+                    <img src="./assets/images/logo/MB.png" class="h-12 object-contain">
+                    <img src="./assets/images/logo/Techcombank.png" class="h-12 object-contain">
+                    <img src="./assets/images/logo/Vietcombank.png" class="h-12 object-contain">
+                    <img src="./assets/images/logo/Vietinbank.png" class="h-12 object-contain">
+                    <img src="./assets/images/logo/VPBank.png" class="h-12 object-contain">
+                </div>
             </div>
+
+
+
+
+
             <!-- Các chứng nhận an toàn -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mx-auto">
                 <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 text-center md:text-left">
                     <img src="./assets/images/kyc.png" alt="KYC" class="w-12 h-12 object-contain">
                     <p class="text-kyc" data-i18n="kyc">Xác minh KYC</p>
@@ -281,7 +330,7 @@
             </div>
 
             <!-- Chú thích cuối -->
-            <p class="mx-auto mt-12 max-w-4xl text-center font-inter font-medium text-[18px] leading-[28px] tracking-[0px] text-[#495057]" data-i18n="complianceNote">
+            <p class="mx-auto mt-12 max-w-4xl text-center font-inter font-medium text-[18px] leading-[28px] tracking-[0px] text-[#001A21]" data-i18n="complianceNote">
                 Hoàn toàn tuân thủ các quy định tài chính của Việt Nam và các tiêu chuẩn chống rửa tiền quốc tế
             </p>
 
@@ -330,7 +379,7 @@
                 </div>
                 <!-- Cột phải: Ảnh -->
                 <div class="flex justify-center lg:justify-start order-1 lg:order-2">
-                    <img src="./assets/images/A1.png" alt="Đội ngũ Remex chuyên nghiệp" class="">
+                    <img src="./assets/images/A1.jpg" alt="Đội ngũ Remex chuyên nghiệp" class="">
                 </div>
             </div>
         </div>
@@ -344,26 +393,24 @@
             <!-- 4 card giải pháp – responsive, rộng tối đa 1240px -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-[1240px] mx-auto">
                 <!-- Card 1: Kiều hối truyền thống -->
-                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
-
+                <div class="card">
                     <h3 class="h3-heading mb-6 text-center" data-i18n="traditionalRemittanceTitle">Kiều hối truyền thống</h3>
-                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="traditionalRemittanceDesc">Chuyển tiền nhanh chóng từ nước ngoài về Việt Nam thông qua tích hợp Single API, tối ưu tốc độ và chi phí.</p>
+                    <p class="text-content text-gray-700 text-left" data-i18n="traditionalRemittanceDesc">Chuyển tiền nhanh chóng từ nước ngoài về Việt Nam thông qua tích hợp Single API, tối ưu tốc độ và chi phí.</p>
                 </div>
                 <!-- Card 2: Kiều hối ứng lương -->
-                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
-
+                <div class="card">
                     <h3 class="h3-heading mb-6 text-center" data-i18n="salaryRemittanceTitle">Kiều hối ứng lương</h3>
-                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="salaryRemittanceDesc">Cho phép người thân tại Việt Nam nhận trước một phần thu nhập của lao động Việt ở nước ngoài trong các tình huống khẩn cấp.</p>
+                    <p class="text-content text-gray-700 text-left" data-i18n="salaryRemittanceDesc">Cho phép người thân tại Việt Nam nhận trước một phần thu nhập của lao động Việt ở nước ngoài trong các tình huống khẩn cấp.</p>
                 </div>
                 <!-- Card 3: Kiều hối đầu tư -->
-                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                <div class="card">
                     <h3 class="h3-heading mb-6 text-center" data-i18n="investmentRemittanceTitle">Kiều hối đầu tư</h3>
-                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="investmentRemittanceDesc">Kết nối cộng đồng người Việt ở nước ngoài với các cơ hội đầu tư cổ phiếu, bất động sản và startup tại Việt Nam.</p>
+                    <p class="text-content text-gray-700 text-left" data-i18n="investmentRemittanceDesc">Kết nối cộng đồng người Việt ở nước ngoài với các cơ hội đầu tư cổ phiếu, bất động sản và startup tại Việt Nam.</p>
                 </div>
                 <!-- Card 4: Kiều hối cho khách du lịch quốc tế -->
-                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                <div class="card">
                     <h3 class="h3-heading mb-6 text-center" data-i18n="touristRemittanceTitle">Kiều hối cho khách du lịch quốc tế</h3>
-                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="touristRemittanceDesc">Đổi ngoại tệ và thanh toán theo thời gian thực cho đơn vị chấp nhận thẻ tại Việt Nam thông qua hạ tầng Remex.</p>
+                    <p class="text-content text-gray-700 text-left" data-i18n="touristRemittanceDesc">Đổi ngoại tệ và thanh toán theo thời gian thực cho đơn vị chấp nhận thẻ tại Việt Nam thông qua hạ tầng Remex.</p>
                 </div>
             </div>
         </div>
@@ -379,29 +426,29 @@
                 </div>
             </div>
             <!-- 3 card hạ tầng – responsive, rộng tối đa 1240px -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1240px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1240px] mx-auto text-center">
                 <!-- Card 1: Tích hợp Single API -->
-                <div class="card-soft">
+                <div class="card">
                     <div class="flex items-center justify-center mx-auto mb-4 ">
-                        <img src="./assets/images/icon/Container.png" alt="Tích hợp Single API" class="w-12 h-12 object-contain">
+                        <img src="./assets/images/cap-phep.png" alt="Tích hợp Single API" class="w-12 h-12 object-contain">
 
                     </div>
                     <h3 class="text-heading-number mb-4" data-i18n="singleApiTitle">Tích hợp Single API</h3>
                     <p class="text-gray-700 leading-relaxed" data-i18n="singleApiDesc"></p>
                 </div>
                 <!-- Card 2: Quy trình End-to-End -->
-                <div class="card-soft">
+                <div class="card">
                     <div class="flex items-center justify-center mx-auto mb-4">
-                        <img src="./assets/images/icon/Container.png" alt="Quy trình End-to-End" class="w-12 h-12 object-contain">
+                        <img src="./assets/images/cap-phep.png" alt="Quy trình End-to-End" class="w-12 h-12 object-contain">
 
                     </div>
                     <h3 class="text-heading-number mb-4" data-i18n="endToEndTitle">Quy trình End-to-End</h3>
                     <p class="text-gray-700 leading-relaxed" data-i18n="endToEndDesc"></p>
                 </div>
                 <!-- Card 3: Sẵn sàng tuân thủ pháp lý -->
-                <div class="card-soft">
+                <div class="card">
                     <div class="flex items-center justify-center mx-auto mb-4">
-                        <img src="./assets/images/icon/Container.png" alt="Sẵn sàng tuân thủ pháp lý" class="w-12 h-12 object-contain">
+                        <img src="./assets/images/cap-phep.png" alt="Sẵn sàng tuân thủ pháp lý" class="w-12 h-12 object-contain">
 
                     </div>
                     <h3 class="text-heading-number mb-4" data-i18n="complianceReadyTitle">Sẵn sàng tuân thủ pháp lý</h3>
@@ -472,11 +519,9 @@
             </div>
         </div>
     </section>
-    <section class="pt-20 bg-white">
+    <!-- <section class="pt-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- 3 card dịch vụ tư vấn – responsive, rộng tối đa 1240px -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1240px] mx-auto">
-                <!-- Card 1: Quản lý quỹ -->
                 <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
                     <h3 class="who mb-4" data-i18n="fundManagementTitle">Quản lý quỹ</h3>
                     <ul class="sub-description text-left">
@@ -488,7 +533,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Card 2: Tư vấn M&A -->
                 <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
                     <h3 class="who mb-4" data-i18n="maConsultingTitle">Tư vấn M&A</h3>
                     <ul class="sub-description text-left">
@@ -498,7 +542,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Card 3: Tư vấn pháp lý -->
                 <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
                     <h3 class="who mb-4" data-i18n="legalConsultingTitle">Tư vấn pháp lý</h3>
                     <ul class="sub-description text-left">
@@ -508,7 +551,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- <section class="pt-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-[4fr_8fr] gap-16 items-center max-w-[1240px] mx-auto">
@@ -606,34 +649,37 @@
                     <p class="text-subtitle" data-i18n="appSubtitle">Theo dõi giao dịch mọi lúc, mọi nơi</p>
                     <div class="space-y-4 ">
                         <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-3 ">
-                            <div class="p-2 ">
-                                <img src="./assets/images/circle-check-big.png " alt=" ">
+                            <div class="p-2">
+                                <img src="./assets/images/circle-check-big.png" alt="" class="w-[30px] h-[30px] object-contain">
                             </div>
+
                             <div>
                                 <h4 class="text-heading-number left" data-i18n="friendlyUI">Giao diện thân thiện</h4>
                                 <p class="description" data-i18n="friendlyUIDesc">Thiết kế hiện đại, dễ sử dụng cho mọi đối tượng</p>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-3 ">
-                            <div class="p-2 ">
-                                <img src="./assets/images/circle-check-big.png " alt=" ">
+                            <div class="p-2">
+                                <img src="./assets/images/circle-check-big.png" alt="" class="w-[30px] h-[30px] object-contain">
                             </div>
+
                             <div>
                                 <h4 class="text-heading-number left" data-i18n="realtimeTracking">Theo dõi giao dịch realtime</h4>
                                 <p class="description" data-i18n="realtimeTrackingDesc">Theo dõi trạng thái giao dịch theo thời gian thực</p>
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-3 ">
-                            <div class="p-2 ">
-                                <img src="./assets/images/circle-check-big.png " alt=" ">
+                            <div class="p-2">
+                                <img src="./assets/images/circle-check-big.png" alt="" class="w-[30px] h-[30px] object-contain">
                             </div>
+
                             <div>
                                 <h4 class="text-heading-number left" data-i18n="notifications">Nhận thông báo khi giao dịch hoàn tất</h4>
                                 <p class="description" data-i18n="notificationsDesc">Thông báo luôn cập nhật</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start flex-wrap gap-4 ">
+                    <!-- <div class="flex flex-col sm:flex-row justify-center lg:justify-start flex-wrap gap-4 ">
                         <button class="bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-lg flex items-center gap-3 justify-center ">
                           <img src="assets/images/vector-359.svg " alt="App Store " class="w-6 h-6 ">
                           <div class="flex flex-col items-start "><span class="text-xs ">Download on the</span><span class="font-medium ">App Store</span>
@@ -644,7 +690,7 @@
                           <div class="flex flex-col items-start "><span class="text-xs ">GET IT ON</span><span class="font-medium ">Google Play</span>
                           </div>
                         </button>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- Ảnh -->
                 <div class="order-1 lg:order-2 flex justify-center lg:justify-end ">
@@ -702,7 +748,7 @@
     </section>
     </div>
     <!-- Footer -->
-    <footer class="bg-[#002B36] text-gray-300 py-12">
+    <footer class="bg-[#004050] text-gray-300 py-12">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Cột chính: mobile 1 cột, căn giữa; desktop 3 cột -->
             <div class="grid grid-cols-1 lg:grid-cols-[6fr_3fr_3fr] gap-4 lg:gap-40 mb-8 justify-items-center lg:justify-items-start text-center lg:text-left">
@@ -743,21 +789,21 @@
                             <i class="fas fa-phone-alt text-green-400"></i>
                             <span data-i18n="hotline">Hotline: 1900-xxx</span>
                         </li>
-                        <li class="flex items-center justify-center w-full md:w-auto">
-                            <a href="https://www.google.com/url?q=https://www.linkedin.com/company/remex-global-payment-services-jsc&sa=D&source=editors&ust=1768359128487319&usg=AOvVaw3RPT_4GNVf803H8p9dh6zL" class="hover:opacity-80 transition" aria-label="linkedin">
-                                <img src="./assets/images/icon/lin.png" alt="linkedin" class="w-6 h-6">
-                            </a>
-                        </li>
-                        <li class="flex items-center justify-center w-full md:w-auto">
-                            <a href="#" class="hover:opacity-80 transition" aria-label="Zalo Support">
-                                <img src="./assets/images/icon/Zaloo.png" alt="Zalo Support" class="w-6 h-6">
-                            </a>
-                        </li>
+                        <!-- group icon -->
+                        <li class="w-full md:w-auto">
+                            <div class="flex justify-center gap-6 md:gap-4">
+                                <a href="https://www.linkedin.com/company/remex-global-payment-services-jsc" target="_blank" rel="noopener noreferrer" aria-label="linkedin">
+                                    <img src="./assets/images/icon/lin.png" class="w-[20px] h-[20px]">
+                                </a>
 
-                        <li class="flex items-center justify-center w-full md:w-auto">
-                            <a href="#" class="hover:opacity-80 transition" aria-label="WhatsApp Support">
-                                <img src="./assets/images/icon/whatapp.png" alt="WhatsApp Support" class="w-6 h-6">
-                            </a>
+                                <a href="#" aria-label="Zalo Support">
+                                    <img src="./assets/images/icon/Zaloo.png" class="w-[20px] h-[20px]">
+                                </a>
+
+                                <a href="#" aria-label="WhatsApp Support">
+                                    <img src="./assets/images/icon/whatapp.png" class="w-[20px] h-[20px]">
+                                </a>
+                            </div>
                         </li>
 
                     </ul>
@@ -795,6 +841,33 @@
 
         lucide.createIcons();
     </script>
+    <script>
+        const track = document.getElementById('logoTrack');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
+
+        const totalItems = track.children.length;
+        let index = 0;
+
+        function update() {
+            track.style.transform = `translateX(-${index * 50}%)`;
+        }
+
+        next.addEventListener('click', () => {
+            if (index < totalItems - 2) {
+                index++;
+                update();
+            }
+        });
+
+        prev.addEventListener('click', () => {
+            if (index > 0) {
+                index--;
+                update();
+            }
+        });
+    </script>
+
 </body>
 
 </html>

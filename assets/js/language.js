@@ -12,12 +12,12 @@ const translations = {
         language: "Ngôn ngữ",
 
 
-        
-        
+
+
         fund_cross_border: "Thanh toán xuyên biên giới",
         fund_management: "Quản lý Quỹ",
         fund_consulting: "Tư vấn",
-        
+
 
 
         // Hero Section
@@ -107,12 +107,8 @@ const translations = {
         whySubtitle: "Vì sao nhiều người chọn Remex để nhận tiền từ nước ngoài?",
 
         // Hero section split keys
-        bridgeTitle: "Cầu nối tài chính",
-        bridgeSubtitle1: "cho cộng đồng",
-        bridgeSubtitle2: "người Việt toàn cầu",
-        paymentSolution: "Giải pháp thanh toán xuyên biên giới, kiều hối",
-        paymentDescription: "và tư vấn tài chính chiến lược – an toàn, nhanh chóng",
-        paymentTransparent: "và minh bạch.",
+        bridgeTitle: "Cầu nối tài chính cho cộng đồng người Việt toàn cầu",
+        paymentSolution: "Giải pháp thanh toán xuyên biên giới, kiều hối và tư vấn tài chính chiến lược – an toàn, nhanh chóng và minh bạch.",
         exploreBtn: "Khám phá giải pháp",
         whyChooseBtn: "Vì sao chọn Remex?",
 
@@ -228,7 +224,7 @@ const translations = {
         signup: "Sign Up",
         language: "Language",
 
-        
+
 
         fund_cross_border: "Cross border payment",
         fund_management: "Fund Management",
@@ -276,7 +272,8 @@ const translations = {
 
         // Solutions (New)
         solutionTitle: "Comprehensive Cross-Border Solutions",
-        traditionalRemittanceTitle: "Traditional Remittance",
+        // traditionalRemittanceTitle: "Traditional Remittance",
+        traditionalRemittanceTitle: "Remittance",
         traditionalRemittanceDesc: "Fast and secure transfers to Vietnam through a single API integration, optimizing both transaction speed and cost efficiency.",
         salaryRemittanceTitle: "Advance Salary Remittance",
         salaryRemittanceDesc: "Enables families in Vietnam to access a portion of overseas workers’ earned wages in emergency situations.",
@@ -319,23 +316,19 @@ const translations = {
 
         // Why Choose Section
         whyTitle: "Why Choose Remex?",
-        whySubtitle: "The trusted financial compass for the global Vietnamese community",
+        whySubtitle: "A trusted financial partner for the global Vietnamese community",
 
         // Hero section split keys
-        bridgeTitle: "The Financial Bridge",
-        bridgeSubtitle1: "for Overseas Vietnamese Communities",
-        bridgeSubtitle2: "and Global Businesses",
-        paymentSolution: "Cross-border payment and remittance solutions,",
-        paymentDescription: "complemented by strategic financial consulting — secure, efficient,",
-        paymentTransparent: "and transparent.",
+        bridgeTitle: "The Financial Bridge for Overseas Vietnamese Communities and Global Businesses",
+        paymentSolution: "Cross-border payment and remittance solutions, complemented by strategic financial consulting — secure, efficient, and transparent.",
         exploreBtn: "Explore Solutions",
         whyChooseBtn: "Why Choose Remex?",
 
         // Infrastructure Desc
         infrastructureDesc: "Remex streamlines complex cross-border payments into seamless inbound and outbound flows.",
-        singleApiDesc: "Connect all payment sources via one API",
-        endToEndDesc: "Seamlessly manage the full transaction lifecycle",
-        complianceReadyDesc: "Guaranteed compliance in every market",
+        singleApiDesc: "Connect multiple payment sources through a single API",
+        endToEndDesc: "Seamlessly manage the entire transaction lifecycle from initiation to settlement",
+        complianceReadyDesc: "Designed to support regulatory compliance across multiple jurisdictions",
 
         // CEO Position
         ceoPosition: "Founder & CEO",
@@ -528,12 +521,8 @@ const translations = {
         whySubtitle: "なぜ多くの人がRemexを選んで海外から送金を受け取るのか？",
 
         // Hero section split keys
-        bridgeTitle: "金融の橋",
-        bridgeSubtitle1: "世界中の",
-        bridgeSubtitle2: "ベトナム人コミュニティのための",
-        paymentSolution: "クロスボーダー決済ソリューション、送金",
-        paymentDescription: "および戦略的な財務コンサルティング – 安全、迅速",
-        paymentTransparent: "かつ透明。",
+        bridgeTitle: "金融の橋 世界中の ベトナム人コミュニティのための",
+        paymentSolution: "クロスボーダー決済ソリューション、送金 および戦略的な財務コンサルティング – 安全、迅速 かつ透明。",
         exploreBtn: "ソリューションを探す",
         whyChooseBtn: "なぜRemexを選ぶのか？",
 
