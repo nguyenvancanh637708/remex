@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P2P Lending & Đấu Giá Lãi Suất - Remex.vn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        
+        .loan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-x-hidden">
+    <!-- Animated Background -->
+    <!-- <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-0 -left-4 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-96 h-96 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+    </div> -->
+
+    <!-- Navigation -->
+    <nav class="bg-[#004050] relative overflow-hidden fixed w-full z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="./assets/images/logo.png" alt="REMEX">
+                    <span class="text-2xl font-bold text-white">REMEX</span>
+                </a>
+
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center gap-8 text-sm">
+                    <a href="index.html" class="text-white hover:text-green-400 transition">Trang chủ</a>
+                    <a href="p2p.html" class="text-white hover:text-green-400 transition flex items-center gap-1">
+                    P2P Lending <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
+                    <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1">
+                    Chuyển tiền & FX <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
+                    <a href="fund.html" class="text-white hover:text-green-400 transition flex items-center gap-1">
+                    Quản lý Quỹ <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="#" class="text-white hidden md:block text-sm">Đăng ký</a>
+                <button class="bg-green-500 hover:bg-green-600 px-6 py-2.5 rounded-[8px] font-medium text-sm text-white">Đăng nhập</button>
+                <!-- Mobile Hamburger -->
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-[#004050]">
+            <a href="index.html" class="block text-white px-6 py-3 border-b border-white/10">Trang chủ</a>
+            <a href="p2p.html" class="block text-white px-6 py-3 border-b border-white/10">P2P Lending</a>
+            <a href="remittance.html" class="block text-white px-6 py-3 border-b border-white/10">Chuyển tiền & FX</a>
+            <a href="fund.html" class="block text-white px-6 py-3 border-b border-white/10">Quản lý Quỹ</a>
+            <a href="#" class="block text-white px-6 py-3 border-b border-white/10">Đăng ký</a>
+            <a href="#" class="block text-white px-6 py-3">Đăng nhập</a>
+        </div>
+    </nav>
+
+    <script>
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    <!-- ==================== HEADER ==================== -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 border-b border-gray-100" hidden>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-gradient-to-br from-blue-600 to-indigo-600 p-2 rounded-lg shadow-md">
+                        <i data-lucide="wallet" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Remex.vn</span
+            >
+          </div>
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="index.html"
+              class="text-gray-600 hover:text-blue-600 transition"
+              >Trang chủ</a
+            >
+            <a href="p2p.html" class="text-blue-600 font-semibold"
+              >P2P Lending</a
+            >
+            <a
+              href="remittance.html"
+              class="text-gray-600 hover:text-blue-600 transition"
+              >Chuyển tiền & FX</a
+            >
+            <a
+              href="fund.html"
+              class="text-gray-600 hover:text-blue-600 transition"
+              >Quản lý Quỹ</a
+            >
+            <button
+              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium"
+            >
+              Đăng nhập
+            </button>
+          </div>
+          <button id="mobileMenuBtn" class="md:hidden">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-3">
+          <a
+            href="index.html"
+            class="block px-4 py-2 hover:bg-blue-50 rounded-lg"
+            >Trang chủ</a
+          >
+          <a
+            href="p2p.html"
+            class="block px-4 py-2 bg-blue-50 rounded-lg font-medium"
+            >P2P Lending</a
+          >
+          <a
+            href="remittance.html"
+            class="block px-4 py-2 hover:bg-blue-50 rounded-lg"
+            >Chuyển tiền & FX</a
+          >
+          <a
+            href="fund.html"
+            class="block px-4 py-2 hover:bg-blue-50 rounded-lg"
+            >Quản lý Quỹ</a
+          >
+          <button
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-medium"
+          >
+            Đăng nhập
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Header + Stats -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="bg-blue-600 p-3 rounded-xl">
+            <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold text-blue-900">
+              P2P Lending & Auction
+            </h1>
+            <p class="text-lg text-gray-600">
+              Cho vay ngang hàng và đấu giá lãi suất
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">12.5%</div>
+            <div class="text-sm text-gray-600">Lãi suất trung bình</div>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-green-600">98.5%</div>
+            <div class="text-sm text-gray-600">Tỷ lệ thu hồi</div>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-purple-600">2,450</div>
+            <div class="text-sm text-gray-600">Khoản vay</div>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-orange-600">500M+</div>
+            <div class="text-sm text-gray-600">Tổng giá trị</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search + Filter -->
+      <div class="bg-white rounded-xl shadow-sm p-4 mb-8">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1 relative">
+            <i
+              data-lucide="search"
+              class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+            ></i>
+            <input
+              type="text"
+              placeholder="Tìm kiếm khoản vay..."
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+          </div>
+          <button
+            class="flex items-center gap-2 px-5 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
+          >
+            <i data-lucide="filter" class="w-4 h-4"></i>
+            Bộ lọc
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex justify-center mb-8">
+        <div class="bg-gray-100 p-1 rounded-lg inline-flex">
+          <button
+            id="tab-lending"
+            class="px-8 py-3 rounded-md font-medium bg-blue-600 text-white"
+          >
+            Cho vay P2P
+          </button>
+          <button
+            id="tab-auction"
+            class="px-8 py-3 rounded-md font-medium hover:bg-gray-200"
+          >
+            Đấu giá lãi suất
+          </button>
+        </div>
+      </div>
+
+      <!-- Lending Tab -->
+      <div id="lending-tab">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+          <h3 class="text-xl font-bold text-blue-900 mb-2">Cho vay P2P</h3>
+          <p class="text-gray-700">
+            Đầu tư vào các khoản vay với lãi suất cố định. Bạn sẽ nhận được lãi
+            suất đã định sẵn khi cho người vay. Phù hợp cho nhà đầu tư muốn lợi
+            nhuận ổn định.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Loan Cards - Lending -->
+          <div
+            class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-all"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">Nguyễn Văn A</h3>
+                <p class="text-sm text-gray-500">
+                  Mở rộng kinh doanh • Điểm tín dụng:
+                  <span class="text-green-600 font-medium">A+</span>
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Xác thực đầy đủ</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">100M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-purple-600">12.5%</div>
+                <div class="text-xs text-gray-600">Lãi suất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">75%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-3 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        <button onclick="openInvestDialog('Nguyễn Văn A', 100000000, 12.5, 12)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+              Đầu tư ngay
+            </button>
+        </div>
+
+        <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-all">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Nguyễn Văn P</h3>
+                    <p class="text-sm text-gray-500">
+                        Mở rộng kinh doanh • Điểm tín dụng:
+                        <span class="text-green-600 font-medium">A+</span>
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Cho vay</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">100M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-purple-600">12.5%</div>
+                <div class="text-xs text-gray-600">Lãi suất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">75%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-3 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        <button onclick="openInvestDialog('Nguyễn Văn A', 100000000, 12.5, 12)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+              Đầu tư ngay
+            </button>
+        </div>
+        <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-all">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Nguyễn Văn D</h3>
+                    <p class="text-sm text-gray-500">
+                        Mở rộng kinh doanh • Điểm tín dụng:
+                        <span class="text-green-600 font-medium">A+</span>
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Xác thực đầy đủ</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">100M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-purple-600">12.5%</div>
+                <div class="text-xs text-gray-600">Lãi suất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">75%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-3 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        <button onclick="openInvestDialog('Nguyễn Văn A', 100000000, 12.5, 12)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+              Đầu tư ngay
+            </button>
+        </div>
+        <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-all">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Nguyễn Văn B</h3>
+                    <p class="text-sm text-gray-500">
+                        Mở rộng kinh doanh • Điểm tín dụng:
+                        <span class="text-green-600 font-medium">A+</span>
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Cho vay</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">100M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-purple-600">12.5%</div>
+                <div class="text-xs text-gray-600">Lãi suất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">75%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-blue-500 to-indigo-600 h-3 rounded-full" style="width: 75%"></div>
+            </div>
+        </div>
+        <button onclick="openInvestDialog('Nguyễn Văn A', 100000000, 12.5, 12)" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+              Đầu tư ngay
+            </button>
+        </div>
+
+        <!-- Thêm các card khác tương tự... (tổng cộng 4 card lending + 3 auction) -->
+        <!-- Để ngắn gọn mình để 1 mẫu, bạn có thể nhân bản -->
+        </div>
+        </div>
+
+        <!-- Auction Tab (hidden by default) -->
+        <div id="auction-tab" class="hidden">
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
+                <h3 class="text-xl font-bold text-purple-900 mb-2">
+                    Đấu giá lãi suất
+                </h3>
+                <p class="text-gray-700">
+                    Người cho vay đấu giá lãi suất để cạnh tranh cho khoản vay. Hệ thống sẽ chọn các mức lãi suất thấp nhất. Phù hợp cho nhà đầu tư muốn tối ưu hóa lợi nhuận.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Hoàng Văn E</h3>
+                            <p class="text-sm text-gray-500">
+                                Mở chi nhánh mới • 12 lượt đấu giá
+                            </p>
+                        </div>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Đấu giá</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">150M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-red-600">11.5%</div>
+                <div class="text-xs text-gray-600">Thấp nhất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">60%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-3 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+                <button onclick="openBidDialog('Hoàng Văn E', 12, 11.5, 12)" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium">
+              Đặt giá đấu thầu
+            </button>
+            </div>
+
+            <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Hoàng Văn N</h3>
+                        <p class="text-sm text-gray-500">
+                            Mở chi nhánh mới • 12 lượt đấu giá
+                        </p>
+                    </div>
+                    <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Đấu giá</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">150M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-red-600">11.5%</div>
+                <div class="text-xs text-gray-600">Thấp nhất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">60%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-3 rounded-full" style="width: 60%"></div>
+                </div>
+            </div>
+            <button onclick="openBidDialog('Hoàng Văn E', 12, 11.5, 12)" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium">
+              Đặt giá đấu thầu
+            </button>
+        </div>
+
+        <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Hoàng Văn M</h3>
+                    <p class="text-sm text-gray-500">
+                        Mở chi nhánh mới • 12 lượt đấu giá
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Đấu giá</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">150M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-red-600">11.5%</div>
+                <div class="text-xs text-gray-600">Thấp nhất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">60%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-3 rounded-full" style="width: 60%"></div>
+            </div>
+        </div>
+        <button onclick="openBidDialog('Hoàng Văn E', 12, 11.5, 12)" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium">
+              Đặt giá đấu thầu
+            </button>
+        </div>
+
+        <div class="loan-card bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">Hoàng Văn F</h3>
+                    <p class="text-sm text-gray-500">
+                        Mở chi nhánh mới • 12 lượt đấu giá
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Đấu giá</span
+              >
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mb-6">
+              <div>
+                <div class="text-2xl font-bold text-blue-600">150M</div>
+                <div class="text-xs text-gray-600">Số tiền</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-red-600">11.5%</div>
+                <div class="text-xs text-gray-600">Thấp nhất</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-orange-600">12 tháng</div>
+                <div class="text-xs text-gray-600">Thời hạn</div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-2">
+                <span>Đã huy động</span><span class="font-bold">60%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-purple-500 to-pink-600 h-3 rounded-full" style="width: 60%"></div>
+            </div>
+        </div>
+        <button onclick="openBidDialog('Hoàng Văn E', 12, 11.5, 12)" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium">
+              Đặt giá đấu thầu
+            </button>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Invest Dialog -->
+        <div id="investDialog" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+                <h2 class="text-2xl font-bold mb-2">Đầu tư vào khoản vay</h2>
+                <p class="text-gray-600 mb-6">
+                    Nhập số tiền bạn muốn đầu tư vào khoản vay của
+                    <span id="investBorrower"></span>
+                </p>
+
+                <div class="space-y-4">
+                    <div class="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Tổng số tiền:</span>
+                            <span id="investAmount"></span> VNĐ
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Lãi suất:</span>
+                            <span id="investRate" class="text-green-600 font-medium"></span
+              >%/năm
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Thời hạn:</span>
+                            <span id="investDuration"></span> tháng
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Số tiền đầu tư (VNĐ)</label
+            >
+            <input
+              id="investInput"
+              type="number"
+              placeholder="Nhập số tiền..."
+              class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
+            />
+            <p class="text-xs text-gray-500 mt-1">
+              Số tiền tối thiểu: 1,000,000 VNĐ
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-8">
+          <button
+            onclick="closeDialog('investDialog')"
+            class="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
+          >
+            Hủy
+          </button>
+          <button
+            onclick="alert('Đã đầu tư thành công!')"
+            class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium"
+          >
+            Xác nhận đầu tư
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bid Dialog -->
+    <div
+      id="bidDialog"
+      class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+        <h2 class="text-2xl font-bold mb-2">Đặt giá đấu giá</h2>
+        <p class="text-gray-600 mb-6">
+          Nhập mức lãi suất bạn muốn đề xuất cho khoản vay của
+          <span id="bidBorrower"></span>
+        </p>
+
+        <div class="space-y-4">
+          <div class="bg-purple-50 rounded-lg p-4 space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Số lượt đấu giá:</span>
+              <span id="bidCount">15</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Lãi suất thấp nhất:</span>
+              <span id="bidLowest" class="text-purple-600 font-medium"></span>%
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Lãi suất hiện tại:</span>
+              <span id="bidCurrent"></span>%
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-2"
+              >Lãi suất đề xuất (%/năm)</label
+            >
+            <input
+              id="bidInput"
+              type="number"
+              step="0.1"
+              placeholder="Nhập lãi suất..."
+              class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+            />
+            <p class="text-xs text-gray-500 mt-1">
+              Lãi suất thấp hơn sẽ có cơ hội được chọn cao hơn
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-8">
+          <button
+            onclick="closeDialog('bidDialog')"
+            class="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
+          >
+            Hủy
+          </button>
+          <button
+            onclick="alert('Đặt giá thành công!')"
+            class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium"
+          >
+            Đặt giá
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#004050] text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-[#CFE9F0] uppercase text-2xl font-bold">REMEX.VN</span>
+                    </div>
+                    <p class="text-sm text-white">Nền tảng tài chính toàn diện cho mọi nhu cầu của bạn</p>
+                </div>
+                <div>
+                    <div class="text-[#CFE9F0] mb-4 font-semibold">Sản phẩm</div>
+                    <ul class="space-y-2 text-sm text-white">
+                        <li><a href="#" class="hover:text-blue-400 transition">P2P Lending</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Remittance</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Fund Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-[#CFE9F0] mb-4 font-semibold">Công ty</div>
+                    <ul class="space-y-2 text-sm text-white">
+                        <li><a href="#" class="hover:text-blue-400 transition">Về chúng tôi</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Tin tức</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-[#CFE9F0] mb-4 font-semibold">Hỗ trợ</div>
+                    <ul class="space-y-2 text-sm text-white">
+                        <li><a href="#" class="hover:text-blue-400 transition">Trung tâm hỗ trợ</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Liên hệ</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Điều khoản</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-[#339CB3] mt-8 pt-8 text-center text-white text-xl">
+                © 2025 Remex.vn. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+
+      // Mobile menu
+      document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+        document.getElementById("mobileMenu").classList.toggle("hidden");
+      });
+
+      // Tabs
+      document.getElementById("tab-lending").addEventListener("click", () => {
+        document.getElementById("lending-tab").classList.remove("hidden");
+        document.getElementById("auction-tab").classList.add("hidden");
+        document
+          .getElementById("tab-lending")
+          .classList.add("bg-blue-600", "text-white");
+        document
+          .getElementById("tab-auction")
+          .classList.remove("bg-blue-600", "text-white");
+      });
+
+      document.getElementById("tab-auction").addEventListener("click", () => {
+        document.getElementById("auction-tab").classList.remove("hidden");
+        document.getElementById("lending-tab").classList.add("hidden");
+        document
+          .getElementById("tab-auction")
+          .classList.add("bg-blue-600", "text-white");
+        document
+          .getElementById("tab-lending")
+          .classList.remove("bg-blue-600", "text-white");
+      });
+
+      // Dialog functions
+      function openInvestDialog(borrower, amount, rate, duration) {
+        document.getElementById("investBorrower").textContent = borrower;
+        document.getElementById("investAmount").textContent =
+          amount.toLocaleString("vi-VN");
+        document.getElementById("investRate").textContent = rate;
+        document.getElementById("investDuration").textContent = duration;
+        document.getElementById("investDialog").classList.remove("hidden");
+      }
+
+      function openBidDialog(borrower, currentRate, lowestBid, count = 15) {
+        document.getElementById("bidBorrower").textContent = borrower;
+        document.getElementById("bidCurrent").textContent = currentRate;
+        document.getElementById("bidLowest").textContent = lowestBid;
+        document.getElementById("bidCount").textContent = count;
+        document.getElementById("bidDialog").classList.remove("hidden");
+      }
+
+      function closeDialog(id) {
+        document.getElementById(id).classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>

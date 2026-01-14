@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remex.vn - Nền Tảng Tài Chính Thông Minh</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.379.0/lucide.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js">
+    </script>
+    <script src="assets/js/language.js">
+    </script>
+    <style>
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .stats-badge {
+            background: rgba(34, 197, 94, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="bg-[#004050] fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="./assets/images/logo-remex.png" alt="ReMex" class="h-9"></a>
+            </div>
+            <!-- Desktop Menu - Fixed gap 88px để khớp chính xác devtools -->
+            <div class="hidden lg:flex items-center gap-[50px] text-base font-medium leading-6"><a href="index.html" class="text-white hover:text-green-400 transition" data-i18n="home">Trang chủ</a>
+                <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & FX</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a>
+                <a href="fund.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="fund">Quản lý Quỹ</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a><a href="about.html" class="text-white hover:text-green-400 transition"
+                    data-i18n="about">Về ReMex</a>
+                <a href="support.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="support">Hỗ trợ</span></a>
+            </div>
+            <!-- Right Side: Language + Buttons -->
+            <div class="flex items-center gap-4">
+                <!-- Language Selector Dropdown -->
+                <div class="hidden md:block relative group">
+                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector>
+            <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
+          </button>
+                    <!-- Dropdown Menu -->
+                    <div class="hidden absolute right-0 mt-0 w-48 bg-[#003746] border border-white/20 rounded-lg shadow-lg group-hover:block z-50">
+                        <button onclick="setLanguage('vi')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
+              <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
+            </button>
+                        <button onclick="setLanguage('en')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
+              <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-4"><span>English</span>
+            </button>
+                        <button onclick="setLanguage('ja')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3">
+              <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
+            </button>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <a href="#" class="text-white hidden md:block px-3 py-[6px] rounded-[12px] font-medium hover:bg-white/10 transition" data-i18n="login">
+                Đăng nhập</a><a href="#" class="inline-flex items-center gap-2 h-[36px] px-3 py-[6px] rounded-lg bg-[#00CC61] hover:bg-[#00b857] text-white text-base font-medium transition" data-i18n="signup">
+                Đăng ký
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"  />
+                </svg></a>
+                <!-- Mobile Hamburger -->
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (giữ đồng nhất như trước) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-[#004050] border-t border-white/10">
+            <!-- Nội dung mobile menu giống phiên bản trước, với ngôn ngữ và buttons --><a href="index.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="home">Trang chủ</a><a href="remittance.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition"
+                data-i18n="remittance">Chuyển tiền & FX</a><a href="fund.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="fund">Quản lý Quỹ</a><a href="about.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition"
+                data-i18n="about">Về ReMex</a><a href="support.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="support">Hỗ trợ</a>
+            <!-- Mobile Language Selector -->
+            <div class="px-6 py-4 border-b border-white/10">
+                <p class="text-white/70 text-sm mb-3" data-i18n="language">Ngôn ngữ</p>
+                <div class="space-y-2">
+                    <button onclick="setLanguage('vi')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                         <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
+                    </button>
+                    <button onclick="setLanguage('en')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                        <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-4"><span>English</span>
+                    </button>
+                    <button onclick="setLanguage('ja')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                        <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
+                    </button>
+                </div>
+            </div><a href="#" class="block text-white px-6 py-4 border-b border-white/10 transition font-medium" data-i18n="login">Đăng nhập</a><a href="#" class="block bg-green-500 text-white px-6 py-4 hover:bg-green-600 transition font-medium" data-i18n="signup">Đăng ký</a>
+        </div>
+    </nav>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="heroSection" class="bg-[#004050] relative overflow-hidden pt-[7rem] pb-[4rem] md:pt-[10rem] md:pb-[6rem]">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Text & Buttons -->
+            <div>
+                <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    <span class="inline sm:block" data-i18n="bridgeTitle">Cầu nối tài chính</span>
+                    <span class="inline sm:block" data-i18n="bridgeSubtitle1">cho cộng đồng</span>
+                    <span class="inline sm:block" data-i18n="bridgeSubtitle2">người Việt toàn cầu</span>
+                </h1>
+
+
+                <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
+                    <span data-i18n="paymentSolution">Giải pháp thanh toán xuyên biên giới, kiều hối</span>
+                    <span class="inline sm:block" data-i18n="paymentDescription">và tư vấn tài chính chiến lược – an toàn, nhanh chóng</span>
+                    <span class="inline sm:block" data-i18n="paymentTransparent">và minh bạch.</span>
+                </p>
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <button class="inline-flex items-center justify-center h-[48px] px-6 py-3 rounded-lg bg-[#00CC61] hover:bg-green-600 text-white text-base font-medium transition" data-i18n="exploreBtn">
+                        Khám phá giải pháp
+                    </button>
+                    <button class="inline-flex items-center justify-center h-[48px] px-3 py-[6px] rounded-lg bg-white border border-[#CED4DA] text-black text-base font-medium shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:bg-gray-100 transition" data-i18n="whyChooseBtn">
+                        Vì sao chọn ReMex?
+                    </button>
+
+                </div>
+            </div>
+            <!-- Image Stack -->
+            <div class="relative w-full flex justify-center mt-12 lg:mt-0">
+                <!-- Ảnh nền full -->
+                <!-- Desktop -->
+                <img src="./assets/images/Group 46.png" alt="" class="hidden md:block relative z-30 w-full h-auto transform scale-150">
+
+                <!-- Mobile -->
+                <img src="./assets/images/girl-banner.png" alt="" class="block md:hidden relative z-30 w-full h-auto transform scale-150">
+            </div>
+        </div>
+    </section>
+    <!-- Liên kết ngân hàng -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Tiêu đề -->
+            <div class="text-center mb-12">
+                <h2 class="h2-heading" data-i18n="trustedTitle">
+                    Được các ngân hàng và đối tác quốc tế tin tưởng
+                </h2>
+                <div class="divider">
+                </div>
+            </div>
+            <!-- Logo ngân hàng -->
+            <div class="grid grid-cols-3 md:grid-cols-7 gap-8 md:gap-12 items-center justify-items-center mb-16">
+                <img src="./assets/images/logo/MBV.png" alt="MBV" class="h-10 md:h-12 object-contain">
+                <img src="./assets/images/logo/BIDV.png" alt="BIDV" class="h-10 md:h-12 object-contain">
+                <img src="./assets/images/logo/MB.png" alt="MB Bank" class="h-10 md:h-12 object-contain">
+                <img src="./assets/images/logo/Techcombank.png" alt="Techcombank" class="h-10 md:h-12 object-contain">
+                <img src="./assets/images/logo/Vietcombank.png" alt="Vietcombank" class="h-10 md:h-12 object-contain">
+                <img src="./assets/images/logo/Vietinbank.png" alt="VietinBank" class="h-10 md:h-12 object-contain">
+                <img src="./assets/images/logo/VPBank.png" alt="VPBank" class="h-10 md:h-12 object-contain">
+            </div>
+            <!-- Các chứng nhận an toàn -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 text-center md:text-left">
+                    <img src="./assets/images/kyc.png" alt="KYC" class="w-12 h-12 object-contain">
+                    <p class="text-kyc" data-i18n="kyc">Xác minh KYC</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 text-center md:text-left">
+                    <img src="./assets/images/alm.png" alt="AML" class="w-12 h-12 object-contain">
+                    <p class="text-kyc" data-i18n="aml">Tuân thủ AML</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 text-center md:text-left">
+                    <img src="./assets/images/qd.png" alt="Compliance" class="w-12 h-12 object-contain">
+                    <p class="text-kyc" data-i18n="compliance">Tuân thủ quy định</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 text-center md:text-left">
+                    <img src="./assets/images/cap-phep.png" alt="Licensed" class="w-12 h-12 object-contain">
+                    <p class="text-kyc" data-i18n="licensed">Được cấp phép</p>
+                </div>
+            </div>
+
+            <!-- Chú thích cuối -->
+            <p class="mx-auto mt-12 max-w-4xl text-center font-inter font-medium text-[18px] leading-[28px] tracking-[0px] text-[#495057]" data-i18n="complianceNote">
+                Hoàn toàn tuân thủ các quy định tài chính của Việt Nam và các tiêu chuẩn chống rửa tiền quốc tế
+            </p>
+
+        </div>
+    </section>
+    <section class="py-20 about-remex">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-[7fr_5fr] gap-16 items-center max-w-[1240px] mx-auto">
+                <!-- Cột trái: Nội dung text -->
+                <div class="space-y-10 order-2 lg:order-1">
+                    <div>
+                        <h2 class="h2-heading h2-left mb-4" data-i18n="aboutRemexTitle">
+                            Không chỉ là công ty kiều hối –
+                            <br> ReMex xây dựng cây cầu tài chính
+                            <br> cho Việt Nam
+                        </h2>
+                        <div class="divider1">
+                        </div>
+                        <p class="text-lg text-[#495057] leading-relaxed mb-10" data-i18n="aboutdesc">
+                            ReMex được thành lập năm 2018 với sứ mệnh kết nối Việt Nam và thế giới, giúp đồng giá trị mà người Việt tạo ra ở nước ngoài được chuyển về quê hương một cách tiện mạch và an toàn.
+                        </p>
+                    </div>
+                    <div class="space-y-6">
+                        <!-- Tốc độ -->
+                        <div class="flex items-start "><i class="fas fa-tachometer-alt text-3xl text-green-500 mt-1"></i>
+                            <div>
+                                <h4 class="text-2xl font-semibold text-[#212529] mb-2" data-i18n="speedtitle">Tốc độ</h4>
+                                <p class="text-[#495057]" data-i18n="speed_desc">Giao dịch gần như theo thời gian thực</p>
+                            </div>
+                        </div>
+                        <!-- Chi phí hợp lý -->
+                        <div class="flex items-start "><i class="fas fa-hand-holding-usd text-3xl text-green-500 mt-1"></i>
+                            <div>
+                                <h4 class="text-2xl font-semibold text-[#212529] mb-2" data-i18n="cost_title">Chi phí hợp lý</h4>
+                                <p class="text-[#495057]" data-i18n="cost_desc">Tỷ giá cạnh tranh, không phí ẩn</p>
+                            </div>
+                        </div>
+                        <!-- An toàn -->
+                        <div class="flex items-start "><i class="fas fa-shield-alt text-3xl text-green-500 mt-1"></i>
+                            <div>
+                                <h4 class="text-2xl font-semibold text-[#212529] mb-2" data-i18n="safety_title">An toàn</h4>
+                                <p class="text-[#495057]" data-i18n="safety_desc">Hoàn toàn tuân thủ pháp lý và bảo mật cao</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cột phải: Ảnh -->
+                <div class="flex justify-center lg:justify-start order-1 lg:order-2">
+                    <img src="./assets/images/A1.png" alt="Đội ngũ ReMex chuyên nghiệp" class="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Tiêu đề -->
+            <div class="text-center mb-16 font-bold">
+                <h2 class="h2-heading" data-i18n="solutionTitle">Giải pháp kiều hối toàn diện</h2>
+            </div>
+            <!-- 4 card giải pháp – responsive, rộng tối đa 1240px -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-[1240px] mx-auto">
+                <!-- Card 1: Kiều hối truyền thống -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+
+                    <h3 class="h3-heading mb-6 text-center" data-i18n="traditionalRemittanceTitle">Kiều hối truyền thống</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="traditionalRemittanceDesc">Chuyển tiền nhanh chóng từ nước ngoài về Việt Nam thông qua tích hợp Single API, tối ưu tốc độ và chi phí.</p>
+                </div>
+                <!-- Card 2: Kiều hối ứng lương -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+
+                    <h3 class="h3-heading mb-6 text-center" data-i18n="salaryRemittanceTitle">Kiều hối ứng lương</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="salaryRemittanceDesc">Cho phép người thân tại Việt Nam nhận trước một phần thu nhập của lao động Việt ở nước ngoài trong các tình huống khẩn cấp.</p>
+                </div>
+                <!-- Card 3: Kiều hối đầu tư -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                    <h3 class="h3-heading mb-6 text-center" data-i18n="investmentRemittanceTitle">Kiều hối đầu tư</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="investmentRemittanceDesc">Kết nối cộng đồng người Việt ở nước ngoài với các cơ hội đầu tư cổ phiếu, bất động sản và startup tại Việt Nam.</p>
+                </div>
+                <!-- Card 4: Kiều hối cho khách du lịch quốc tế -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                    <h3 class="h3-heading mb-6 text-center" data-i18n="touristRemittanceTitle">Kiều hối cho khách du lịch quốc tế</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed text-center" data-i18n="touristRemittanceDesc">Đổi ngoại tệ và thanh toán theo thời gian thực cho đơn vị chấp nhận thẻ tại Việt Nam thông qua hạ tầng ReMex.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Tiêu đề -->
+            <div class="text-center mb-16">
+                <h2 class="h2-heading mb-2" data-i18n="infrastructureTitle">Một hạ tầng - Kết nối toàn bộ dòng tiền</h2>
+
+                <p class="cta-description" data-i18n="infrastructureDesc">ReMex đơn giản hóa các quy trình thanh toán xuyên biên giới phức tạp thànhmột luồng liên mạch, sẵn sàng cho cả inbound và outbound.</p>
+                <div class="divider">
+                </div>
+            </div>
+            <!-- 3 card hạ tầng – responsive, rộng tối đa 1240px -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1240px] mx-auto">
+                <!-- Card 1: Tích hợp Single API -->
+                <div class="card-soft">
+                    <div class="flex items-center justify-center mx-auto mb-4 ">
+                        <img src="./assets/images/icon/Container.png" alt="Tích hợp Single API" class="w-12 h-12 object-contain">
+                        
+                    </div>
+                    <h3 class="text-heading-number mb-4" data-i18n="singleApiTitle">Tích hợp Single API</h3>
+                    <p class="text-gray-700 leading-relaxed" data-i18n="singleApiDesc"></p>
+                </div>
+                <!-- Card 2: Quy trình End-to-End -->
+                <div class="card-soft">
+                    <div class="flex items-center justify-center mx-auto mb-4">
+                        <img src="./assets/images/icon/Container.png" alt="Quy trình End-to-End" class="w-12 h-12 object-contain">
+                        
+                    </div>
+                    <h3 class="text-heading-number mb-4" data-i18n="endToEndTitle">Quy trình End-to-End</h3>
+                    <p class="text-gray-700 leading-relaxed" data-i18n="endToEndDesc"></p>
+                </div>
+                <!-- Card 3: Sẵn sàng tuân thủ pháp lý -->
+                <div class="card-soft">
+                    <div class="flex items-center justify-center mx-auto mb-4">
+                        <img src="./assets/images/icon/Container.png" alt="Sẵn sàng tuân thủ pháp lý" class="w-12 h-12 object-contain">
+                       
+                    </div>
+                    <h3 class="text-heading-number mb-4" data-i18n="complianceReadyTitle">Sẵn sàng tuân thủ pháp lý</h3>
+                    <p class="text-gray-700 leading-relaxed" data-i18n="complianceReadyDesc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Why Choose Us -->
+    <section class="pt-20 bg-white ">
+        <div class="max-w-7xl mx-auto px-6 ">
+            <!-- Tiêu đề -->
+            <div class="text-center mb-16 ">
+                <h2 class="h2-heading mb-2" data-i18n="whyTitle">
+                    Tại Sao Chọn Remex.vn?
+                </h2>
+                <p class="cta-description text-[#212529]" data-i18n="whySubtitle">
+                    Vì sao nhiều người chọn ReMex để nhận tiền từ nước ngoài?
+                </p>
+                <div class="divider">
+                </div>
+            </div>
+            <!-- Layout 2 cột -->
+            <div class="grid lg:grid-cols-[4fr_8fr] gap-12 items-center  ">
+                <!-- Ảnh bên trái -->
+                <div class="flex justify-center lg:justify-end order-2 lg:order-1 ">
+                    <img src="./assets/images/anh1.png " alt="Người dùng sử dụng ReMex trên điện thoại và laptop " class=" ">
+                </div>
+                <!-- Danh sách lợi ích bên phải – chính xác theo Figma -->
+                <div class="flex flex-col gap-4 order-1 lg:order-2">
+                    <!-- Item 1 -->
+                    <div class="info-row">
+                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 ">
+                            <img src="./assets/images/icon/CP.png " alt="No complexity " class="w-8 h-8 object-contain ">
+                        </div>
+                        <p class="text-tick" data-i18n="noComplexity">
+                            Không phải tự làm việc với nhiều bên phức tạp
+                        </p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="info-row">
+                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 ">
+                            <img src="./assets/images/icon/CP.png " alt="Trusted " class="w-8 h-8 object-contain ">
+                        </div>
+                        <p class="text-tick" data-i18n="trustedIntermediary">
+                            Có ReMex đứng ra xử lý và chịu trách nhiệm trung gian
+                        </p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="info-row">
+                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 ">
+                            <img src="./assets/images/icon/CP.png " alt="Tracking " class="w-8 h-8 object-contain ">
+                        </div>
+                        <p class="text-tick" data-i18n="clearTracking">
+                            Trạng thái giao dịch rõ ràng, dễ theo dõi
+                        </p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="info-row">
+                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 ">
+                            <img src="./assets/images/icon/CP.png " alt="Support " class="w-8 h-8 object-contain ">
+                        </div>
+                        <p class="text-tick" data-i18n="quickSupport">
+                            Có hỗ trợ khi xảy ra sự cố
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- 3 card dịch vụ tư vấn – responsive, rộng tối đa 1240px -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1240px] mx-auto">
+                <!-- Card 1: Quản lý quỹ -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                    <h3 class="who mb-4" data-i18n="fundManagementTitle">Quản lý quỹ</h3>
+                    <ul class="sub-description text-left">
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500"></i><span data-i18n="fundManagementDesc1">- Sở hữu giấy phép quản lý quỹ</span>
+                        </li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500"></i><span data-i18n="fundManagementDesc2">- Đầu tư tối đa 49% vào SME Việt Nam</span>
+                        </li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500"></i><span data-i18n="fundManagementDesc3">- Đối tác quản trị địa phương cho quỹ nước ngoài</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Card 2: Tư vấn M&A -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                    <h3 class="who mb-4" data-i18n="maConsultingTitle">Tư vấn M&A</h3>
+                    <ul class="sub-description text-left">
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500"></i><span data-i18n="maConsultingDesc1">- Tư vấn chiến lược cho các thương vụ M&A tại Việt Nam</span>
+                        </li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500"></i><span data-i18n="maConsultingDesc2">- Am hiểu thị trường và hỗ trợ đàm phán</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Card 3: Tư vấn pháp lý -->
+                <div class="bg-white rounded-3xl p-8 flex flex-col transition-all duration-300 shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] hover:shadow-[0_0_2px_0_#2125291A,0_6px_12px_0_#21252924]">
+                    <h3 class="who mb-4" data-i18n="legalConsultingTitle">Tư vấn pháp lý</h3>
+                    <ul class="sub-description text-left">
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-green-500"></i><span data-i18n="legalConsultingDesc">- Hỗ trợ cấp phép, tuân thủ và gia nhập thị trường Việt Nam</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section class="pt-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-[4fr_8fr] gap-16 items-center max-w-[1240px] mx-auto">
+                
+                <div class="flex justify-center lg:justify-end order-2 lg:order-1">
+                    <img src="./assets/images/CEO.png" alt="CEO Trịnh Quang Tân" class="">
+                    
+                </div>
+                
+                <div class="space-y-8 order-1 lg:order-2">
+                    <div>
+                        <h2 class="h2-heading h2-left" data-i18n="ceoTitle">CEO Trịnh Quang Tân</h2>
+                        <p class="text-2xl text-gray-700 font-medium" data-i18n="ceoPosition">Nhà sáng lập & CEO</p>
+                    </div>
+                    <p class="text-lg text-gray-700 leading-relaxed" data-i18n="ceoDescription"></p>
+
+                  
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Testimonials -->
+    <section class="pt-20 bg-white ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <div class="text-center mb-16 ">
+                <h2 class="h2-heading mb-2" data-i18n="testimonialsTitle">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+
+                <p class="cta-description" data-i18n="testimonialsSubtitle">Những trải nghiệm thực tế từ cộng đồng người dùng Remex.vn</p>
+                <div class="divider">
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 ">
+                <div class="bg-white rounded-2xl p-8 shadow-lg ">
+                    <div class="flex gap-1 mb-4 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-4 h-4 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="testimonial1">"Remex.vn đã giúp tôi tối ưu hóa danh mục đầu tư với lợi nhuận vượt kỳ vọng. Nền tảng dễ sử dụng và hỗ trợ khách hàng rất tận tâm. "</p>
+                    <div class="flex items-center gap-3 ">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold ">VS</div>
+                        <div>
+                            <div class="font-bold text-gray-900 ">Nguyễn Văn Sang</div>
+                            <div class="text-gray-500 text-sm" data-i18n="investor">Nhà đầu tư</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg ">
+                    <div class="flex gap-1 mb-4 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="testimonial2">"Chuyển tiền quốc tế chưa bao giờ dễ dàng đến vậy. Phí thấp, tỷ giá tốt, và tiền đến nhanh. Tôi rất hài lòng với dịch vụ, hỗ trợ khách hàng rất tận tâm. "</p>
+                    <div class="flex items-center gap-3 ">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold ">AN</div>
+                        <div>
+                            <div class="font-bold text-gray-900 ">Nguyễn Ngọc An Nhiên</div>
+                            <div class="text-gray-500 text-sm" data-i18n="entrepreneur">Doanh nhân</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg ">
+                    <div class="flex gap-1 mb-4 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                        <img src="assets/images/vector-213.svg " alt=" " class="w-5 h-5 ">
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="testimonial3">"Remex.vn đã giúp tôi tối ưu hóa danh mục đầu tư với lợi nhuận vượt kỳ vọng. Nền tảng dễ sử dụng và hỗ trợ khách hàng rất tận tâm."</p>
+                    <div class="flex items-center gap-3 ">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold ">MC</div>
+                        <div>
+                            <div class="font-bold text-gray-900 ">Nguyễn Ngọc Minh Châu</div>
+                            <div class="text-gray-500 text-sm" data-i18n="itEngineer">Nhà thiết kế</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Mobile App -->
+    <section class="pt-20 bg-white ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <div class="grid lg:grid-cols-[5fr_7fr] gap-12 items-center">
+                <!-- Nội dung -->
+                <div class="order-2 lg:order-1 space-y-8 text-center lg:text-left ">
+                    <h2 class="h2-heading h2-left mb-2 !text-center sm:!text-left" data-i18n="appTitle">Quản Lý Và Theo Dõi Giao Dịch</h2>
+
+                    <p class="text-subtitle" data-i18n="appSubtitle">Theo dõi giao dịch mọi lúc, mọi nơi</p>
+                    <div class="space-y-4 ">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-3 ">
+                            <div class="p-2 ">
+                                <img src="./assets/images/circle-check-big.png " alt=" ">
+                            </div>
+                            <div>
+                                <h4 class="text-heading-number left" data-i18n="friendlyUI">Giao diện thân thiện</h4>
+                                <p class="description" data-i18n="friendlyUIDesc">Thiết kế hiện đại, dễ sử dụng cho mọi đối tượng</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-3 ">
+                            <div class="p-2 ">
+                                <img src="./assets/images/circle-check-big.png " alt=" ">
+                            </div>
+                            <div>
+                                <h4 class="text-heading-number left" data-i18n="realtimeTracking">Theo dõi giao dịch realtime</h4>
+                                <p class="description" data-i18n="realtimeTrackingDesc">Theo dõi trạng thái giao dịch theo thời gian thực</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-3 ">
+                            <div class="p-2 ">
+                                <img src="./assets/images/circle-check-big.png " alt=" ">
+                            </div>
+                            <div>
+                                <h4 class="text-heading-number left" data-i18n="notifications">Nhận thông báo khi giao dịch hoàn tất</h4>
+                                <p class="description" data-i18n="notificationsDesc">Thông báo luôn cập nhật</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start flex-wrap gap-4 ">
+                        <button class="bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-lg flex items-center gap-3 justify-center ">
+                          <img src="assets/images/vector-359.svg " alt="App Store " class="w-6 h-6 ">
+                          <div class="flex flex-col items-start "><span class="text-xs ">Download on the</span><span class="font-medium ">App Store</span>
+                          </div>
+                        </button>
+                        <button class="bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-lg flex items-center gap-3 justify-center ">
+                          <img src="assets/images/vector-369.svg " alt="Google Play " class="w-6 h-6 ">
+                          <div class="flex flex-col items-start "><span class="text-xs ">GET IT ON</span><span class="font-medium ">Google Play</span>
+                          </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Ảnh -->
+                <div class="order-1 lg:order-2 flex justify-center lg:justify-end ">
+                    <img src="./assets/images/app.jpg " alt="Mobile App " class="w-full max-w-md sm:max-w-lg lg:max-w-full " />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col gap-8">
+            <div>
+                <h2 class="h2-heading mb-2">
+                    <span data-i18n="cta.line1">Người Việt đi đâu</span>
+                    <span class="hidden sm:inline"> – </span>
+                    <span class="block sm:inline" data-i18n="cta.line2">ReMex theo đó</span>
+                </h2>
+
+                </h2>
+                <p class="cta-description" data-i18n="ctaDescription">
+                    Tham gia ReMex để trải nghiệm dịch vụ chuyển tiền xuyên biên giới đơn giản, rõ ràng và minh bạch.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-4 justify-center ">
+                <button class="inline-flex items-center justify-center h-[48px] px-3 py-[6px] rounded-lg bg-white border border-[#CED4DA] text-black text-base font-medium shadow-[0_0_1px_0_#21252914,0_2px_2px_0_#2125290F] transition" data-i18n="signupFree">
+        Liên hệ ReMex
+      </button>
+                <!--
+    <button class="border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-lg text-lg ">Liên hệ tư vấn</button>
+    -->
+            </div>
+        </div>
+    </section>
+    </section>
+    <!-- ==================== P2P Lending ==================== -->
+    <section id="p2p" class="section">
+        <div class="py-32 text-center bg-gradient-to-br from-blue-50 to-indigo-50">
+            <h2 class="h2-heading mb-2" data-i18n="p2pLendingTitle">P2P Lending & Đấu Giá Lãi Suất</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="p2pLendingDesc">Nội dung chi tiết về P2P Lending sẽ được phát triển tại đây...</p>
+        </div>
+    </section>
+    <!-- ==================== Remittance & FX ==================== -->
+    <section id="remittance" class="section">
+        <div class="py-32 text-center bg-gradient-to-br from-purple-50 to-pink-50">
+            <h2 class="text-5xl font-bold text-purple-900 mb-6" data-i18n="remittanceFxTitle">Chuyển Tiền Quốc Tế & FX</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="remittanceFxDesc">Nội dung chi tiết về chuyển tiền quốc tế và tỷ giá ngoại tệ sẽ ở đây...</p>
+        </div>
+    </section>
+    <!-- ==================== Fund Management ==================== -->
+    <section id="fund" class="section">
+        <div class="py-32 text-center bg-gradient-to-br from-green-50 to-emerald-50">
+            <h2 class="text-5xl font-bold text-green-900 mb-6" data-i18n="fundManagementPageTitle">Quản Lý Quỹ Tư Nhân</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="fundManagementPageDesc">Nội dung chi tiết về quản lý quỹ chuyên nghiệp sẽ được trình bày tại đây...</p>
+        </div>
+    </section>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-[#002B36] text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Cột chính: mobile 1 cột, căn giữa; desktop 3 cột -->
+            <div class="grid grid-cols-1 lg:grid-cols-[6fr_3fr_3fr] gap-4 lg:gap-40 mb-8 justify-items-center lg:justify-items-start text-center lg:text-left">
+                <!-- Cột 1: Logo + Mô tả -->
+                <div class="lg:col-span-1">
+                    <div class="flex justify-center lg:justify-start items-center gap-4 mb-6">
+                        <img src="./assets/images/logo-remex.png" alt="ReMex" class="h-12">
+                    </div>
+                    <p class="text-sm leading-relaxed" data-i18n="footerDesc">
+                        ReMex là nền trung gian thanh toán xuyên biên giới đáng tin cậy, giúp chuyển tiền từ nước ngoài đến người nhận tại Việt Nam một cách an toàn và hợp pháp.
+                    </p>
+                </div>
+                <!-- Cột 2: Công ty -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6" data-i18n="company">Công ty</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="about.html" class="hover:text-green-400 transition" data-i18n="about">Về ReMex</a></li>
+                        <li><a href="recruitment.html" class="hover:text-green-400 transition" data-i18n="recruitment">Tuyển dụng</a></li>
+                        <li><a href="news.html" class="hover:text-green-400 transition" data-i18n="news">Tin tức</a></li>
+                    </ul>
+                </div>
+                <!-- Cột 3: Sản phẩm -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6" data-i18n="products">Sản phẩm</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="remittance.html" class="hover:text-green-400 transition" data-i18n="remittance">Chuyển tiền và FX</a></li>
+                        <li><a href="fund.html" class="hover:text-green-400 transition" data-i18n="fund">Quản lý quỹ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div class="w-full mb-8 text-center lg:text-left">
+                <div class="rounded-lg">
+                    <h4 class="text-white font-semibold text-lg mb-6" data-i18n="support">Hỗ trợ</h4>
+                    <ul class="flex flex-col md:flex-row gap-6 w-full text-center md:text-left items-center md:items-start">
+                        <li class="flex items-center justify-center w-full md:w-auto">
+                            <i class="fas fa-phone-alt text-green-400"></i>
+                            <span data-i18n="hotline">Hotline: 1900-xxx</span>
+                        </li>
+                        <li class="flex items-center justify-center gap-3 w-full md:w-auto">
+                            <i class="fab fa-zalo text-green-400 text-xl"></i>
+                            <a href="#" class="hover:text-green-400 transition" data-i18n="zalosupport">Zalo Support</a>
+                        </li>
+                        <li class="flex items-center justify-center gap-3 w-full md:w-auto">
+                            <i class="fab fa-whatsapp text-green-400 text-xl"></i>
+                            <a href="#" class="hover:text-green-400 transition" data-i18n="whatsappsupport">WhatsApp Support</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- Dòng dưới cùng -->
+            <div class="flex flex-col md:flex-row justify-center md:justify-between items-center text-sm text-center md:text-left">
+                <p data-i18n="copyright">© 2025 ReMex.vn. All rights reserved.</p>
+                <div class="flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 justify-center md:justify-start">
+                    <a href="privacy.html" class="hover:text-green-400 transition" data-i18n="privacy">Chính sách bảo mật</a>
+                    <a href="terms.html" class="hover:text-green-400 transition" data-i18n="terms">Điều khoản dịch vụ</a>
+                    <a href="compliance.html" class="hover:text-green-400 transition" data-i18n="complianceLink">Tuân thủ pháp luật</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const svg = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        });
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
