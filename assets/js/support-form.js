@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hiển thị tên file khi người dùng chọn file
     if (fileInput && fileNameDisplay) {
-        fileInput.addEventListener('change', function(e) {
+        fileInput.addEventListener('change', function (e) {
             if (this.files && this.files.length > 0) {
                 // Rút gọn tên file nếu quá dài
                 let fileName = this.files[0].name;
@@ -42,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
             spinner.innerHTML = `<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>`;
             submitBtn.prepend(spinner);
         }
-        
+
         hideMessage();
 
         // 2. Thu thập dữ liệu
         const formData = new FormData(supportForm);
-        
+
         // Kiểm tra xem có file đính kèm không, nếu không có file thì xóa key attachment khỏi formData
         // để tránh lỗi ở backend nếu backend không bắt file trống chuẩn
         const fileField = formData.get('attachment');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Gọi API
         try {
-            const response = await fetch('http://localhost:8082/api/v1/support/tickets', {
+            const response = await fetch('http://10.12.20.60:8082/api/v1/support/tickets', {
                 method: 'POST',
                 // Không set Content-Type: multipart/form-data. Trình duyệt sẽ tự động set khi dùng FormData và sinh ra boundary đúng
                 body: formData
@@ -103,16 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showMessage(type, message) {
         if (!formMessage) return;
-        
+
         formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'border-green-400', 'bg-red-100', 'text-red-800', 'border-red-400');
         formMessage.classList.add('border');
-        
+
         if (type === 'success') {
             formMessage.classList.add('bg-green-100', 'text-green-700', 'border-green-400');
         } else {
             formMessage.classList.add('bg-red-100', 'text-red-700', 'border-red-400');
         }
-        
+
         formMessage.innerHTML = message;
     }
 
