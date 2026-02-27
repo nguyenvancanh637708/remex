@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" style="overflow-x: hidden;">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quản lý Quỹ Đầu Tư - Remex.vn</title>
-    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <title data-i18n="title_fund">Remex GPS - Quản lý quỹ & cổng kết nối đầu tư</title>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+    <!-- CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/about.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/animation.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.379.0/lucide.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Scripts cần thiết (jQuery phải load trước) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/language.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <style>
         @keyframes blob {
@@ -37,93 +49,147 @@
             animation-delay: 4s;
         }
         
-        .fund-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
         
-        .icon-primary {
-            background-color: #DFFFF0 !important;
-            color: #00A84F;
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
         
-        .icon-primary i,
-        .icon-primary svg {
-            color: #00A84F;
+        .section {
+            display: none;
         }
         
-        .text-primary {
-            color: #005C75 !important;
+        .section.active {
+            display: block;
         }
         
-        .bg-primary {
-            background-color: #005C75 !important;
-            color: #fff !important;
+        body {
+            font-family: 'Inter', sans-serif;
         }
-        /* Button mặc định */
         
-        .tab-btn {
-            transition: background-color 0.25s ease, color 0.25s ease;
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
-        /* Hover CHỈ áp dụng cho tab CHƯA active */
         
-        .tab-btn:not(.is-active):hover {
-            background-color: #f3f4f6;
-            color: #000;
+        .stats-badge {
+            background: rgba(34, 197, 94, 0.15);
+            backdrop-filter: blur(10px);
         }
-        /* Active tab (giữ màu primary) */
         
-        .tab-btn.is-active {
-            background-color: #005C75 !important;
-            color: #fff !important;
+        .floating {
+            animation: float 6s ease-in-out infinite;
         }
     </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 relative overflow-x-hidden">
-
-    <nav class="bg-[#004050] fixed w-full top-0 z-50">
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-x-hidden">
+    <nav class="bg-[#001A21] fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="./assets/images/logo-remex.png" alt="ReMex" class="h-9"></a>
+                    <img src="./assets/images/logo-remex.png" alt="Remex GPS" class="h-9"></a>
             </div>
             <!-- Desktop Menu - Fixed gap 88px để khớp chính xác devtools -->
-            <div class="hidden lg:flex items-center gap-[50px] text-base font-medium leading-6"><a href="index.html" class="text-white hover:text-green-400 transition" data-i18n="home">Trang chủ</a>
-                <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & FX</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a>
-                <a href="fund.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="fund">Quản lý Quỹ</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a><a href="about.html" class="text-white hover:text-green-400 transition"
-                    data-i18n="about">Về ReMex</a>
+            <div class="hidden lg:flex items-center gap-[50px] text-base font-medium leading-6">
+                <a href="about.html" class="text-white hover:text-green-400 transition" data-i18n="about">Về Remex GPS</a>
+                <!-- <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & Ngoại hối</span></a> -->
+                <div class="relative group">
+                    <a href="#" class="text-white hover:text-green-400 transition flex items-center gap-1">
+                        <span data-i18n="fund">Giải pháp dịch vụ</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+
+                    <!-- Sub menu -->
+                    <div class="absolute top-full left-0 mt-2 w-56 bg-[#001A21] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+
+                        <!-- Cross border payment với sub-menu -->
+                        <div class="group/sub relative">
+                            <a href="cross.html" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition flex justify-between items-center" data-i18n="crossBanner">
+                                Cross border payment
+                                <span class="text-xs">›</span>
+                            </a>
+
+                            <!-- Sub-menu của Cross border payment -->
+                            <div class="absolute top-0 left-full ml-1 w-48 bg-[#001A21] shadow-lg opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                                <a href="cross.html#remittance_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_remittance_title">
+                        Kiều Hối & Chuyển Tiền Cá Nhân
+                                </a>
+                                <a href="cross.html#salary_remittance_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_salary_remittance_title">
+                        Giải Pháp Kiều Hối Ứng Lương & Tiếp Cận Thu Nhập
+                                </a>
+                                <a href="cross.html#investment_remittance_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_investment_remittance_title">
+                        Giải Pháp Kiều Hối Đầu Tư & Dòng Vốn Hồi Hương
+                                </a>
+                                <a href="cross.html#tourism_payment_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_tourism_payment_title">
+                        Hạ Tầng Thanh Toán Du Lịch & Mua Hàng Xuyên Biên Giới
+                                </a>
+                                <a href="cross.html#crossborder_strategy_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_crossborder_strategy_title">
+                        Tư Vấn Chiến Lược & Giải Pháp Thanh Toán Xuyên Biên Giới Toàn Diện
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Cross border payment với sub-menu -->
+                        <div class="group/sub relative">
+                            <a href="fund.html" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition flex justify-between items-center" data-i18n="fund-Title">
+                                Cross border payment
+                                <span class="text-xs">›</span>
+                            </a>
+                            <!-- Sub-menu của Cross border payment -->
+                            <div class="absolute top-0 left-full ml-2 w-48 bg-[#001A21] shadow-lg opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200">
+                                <a href="fund.html#fund-management" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_fund_management_title">
+                                    Giải Pháp Quản Lý Quỹ Toàn Diện
+                                </a>
+                                <a href="fund.html#strategic_investment_gateway_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_fund_card1_title">
+                                    Cổng Kết Nối Đầu Tư Chiến Lược
+                                </a>
+                                <a href="fund.html#consulting_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_consulting_title">
+                                    Tư vấn Doanh nghiệp & Giải pháp Pháp lý Quy định
+                                </a>
+                                <a href="fund.html#ma_title" class="block px-4 py-2 text-white hover:bg-[#004050] transition" data-i18n="sub_ma_title">
+                                    Tư Vấn Mua Bán & Sáp Nhập Chiến Lược
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <a href="support.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="support">Hỗ trợ</span></a>
             </div>
             <!-- Right Side: Language + Buttons -->
             <div class="flex items-center gap-4">
                 <!-- Language Selector Dropdown -->
                 <div class="hidden md:block relative group">
-                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector>
-            <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
-          </button>
+                    <!-- <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector> -->
+                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-white/30" data-lang-selector>
+                        <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
                     <!-- Dropdown Menu -->
                     <div class="hidden absolute right-0 mt-0 w-48 bg-[#003746] border border-white/20 rounded-lg shadow-lg group-hover:block z-50">
                         <button onclick="setLanguage('vi')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
               <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
             </button>
                         <button onclick="setLanguage('en')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
-              <img src="https://flagcdn.com/24x18/us.png" alt="English" class="w-5 h-4"><span>English</span>
+              <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-4"><span>English</span>
             </button>
                         <button onclick="setLanguage('ja')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3">
               <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
             </button>
                     </div>
                 </div>
-                <!-- Buttons -->
-                <a href="#" class="text-white hidden md:block px-3 py-[6px] rounded-[12px] font-medium hover:bg-white/10 transition" data-i18n="login">
-                Đăng nhập</a><a href="#" class="inline-flex items-center gap-2 h-[36px] px-3 py-[6px] rounded-lg bg-[#00CC61] hover:bg-[#00b857] text-white text-base font-medium transition" data-i18n="signup">
-                Đăng ký
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"  />
-                </svg></a>
+
                 <!-- Mobile Hamburger -->
                 <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,617 +200,766 @@
             </div>
         </div>
         <!-- Mobile Menu (giữ đồng nhất như trước) -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-[#004050] border-t border-white/10">
-            <!-- Nội dung mobile menu giống phiên bản trước, với ngôn ngữ và buttons --><a href="index.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="home">Trang chủ</a><a href="remittance.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition"
-                data-i18n="remittance">Chuyển tiền & FX</a><a href="fund.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="fund">Quản lý Quỹ</a><a href="about.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition"
-                data-i18n="about">Về ReMex</a><a href="support.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="support">Hỗ trợ</a>
-            <!-- Mobile Language Selector -->
-            <div class="px-6 py-4 border-b border-white/10">
-                <p class="text-white/70 text-sm mb-3" data-i18n="language">Ngôn ngữ</p>
-                <div class="space-y-2">
-                    <button onclick="setLanguage('vi')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
-          <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
+        <div id="mobile-menu" class="hidden lg:hidden
+           bg-[#001A21]
+           border-t border-white/10
+           min-h-screen
+           h-screen
+           overflow-y-auto">
+
+            <a href="about.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="about">
+        Về Remex GPS
+    </a>
+
+            <!-- <a href="remittance.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="remittance">
+        Chuyển tiền & Ngoại hối
+    </a> -->
+
+            <!-- ===== FUND MENU ===== -->
+            <div class="border-b border-white/10">
+
+                <!-- Menu cha -->
+                <button type="button" onclick="toggleFundMenu()" class="w-full flex items-center justify-between
+                   text-white px-6 py-4 hover:bg-white/5 transition">
+
+            <span data-i18n="fund">Giải pháp dịch vụ</span>
+
+            <!-- icon -->
+            <svg id="fund-arrow"
+                 class="w-4 h-4 transition-transform duration-200"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
         </button>
-                    <button onclick="setLanguage('en')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
-          <img src="https://flagcdn.com/24x18/us.png" alt="English" class="w-5 h-4"><span>English</span>
-        </button>
-                    <button onclick="setLanguage('ja')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
-          <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
-        </button>
+
+                <!-- Sub menu -->
+                <div id="fund-submenu" class="hidden bg-[#001A21]">
+
+                    <!-- ── Nhóm 1: Cross border payment ── -->
+                    <button type="button" onclick="toggleMobileSubGroup('crossborder-group')" class="w-full flex items-center justify-between
+                   text-white pl-10 pr-6 py-3
+                   hover:bg-white/5 transition text-sm border-t border-white/10">
+        <span data-i18n="crossBanner">Cross border payment</span>
+        <svg id="crossborder-group-arrow"
+             class="w-4 h-4 transition-transform duration-200"
+             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+        </svg>
+    </button>
+
+                    <!-- Sub-menu cấp 3: Cross border payment -->
+                    <div id="crossborder-group" class="hidden bg-[#00111a]">
+                        <a href="cross.html#remittance_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_remittance_title">
+            Kiều Hối &amp; Chuyển Tiền Cá Nhân
+        </a>
+                        <a href="cross.html#salary_remittance_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_salary_remittance_title">
+            Giải Pháp Kiều Hối Ứng Lương &amp; Tiếp Cận Thu Nhập
+        </a>
+                        <a href="cross.html#investment_remittance_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_investment_remittance_title">
+            Giải Pháp Kiều Hối Đầu Tư &amp; Dòng Vốn Hồi Hương
+        </a>
+                        <a href="cross.html#tourism_payment_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_tourism_payment_title">
+            Hạ Tầng Thanh Toán Du Lịch &amp; Mua Hàng Xuyên Biên Giới
+        </a>
+                        <a href="cross.html#crossborder_strategy_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_crossborder_strategy_title">
+            Tư Vấn Chiến Lược &amp; Giải Pháp Thanh Toán Xuyên Biên Giới Toàn Diện
+        </a>
+                    </div>
+
+                    <!-- ── Nhóm 2: Fund Management ── -->
+                    <button type="button" onclick="toggleMobileSubGroup('fundmgmt-group')" class="w-full flex items-center justify-between
+                   text-white pl-10 pr-6 py-3
+                   hover:bg-white/5 transition text-sm border-t border-white/10">
+        <span data-i18n="fund-Title">Fund Management</span>
+        <svg id="fundmgmt-group-arrow"
+             class="w-4 h-4 transition-transform duration-200"
+             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+        </svg>
+    </button>
+
+                    <!-- Sub-menu cấp 3: Fund Management -->
+                    <div id="fundmgmt-group" class="hidden bg-[#00111a]">
+                        <a href="fund.html#fund-management" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_fund_management_title">
+            Giải Pháp Quản Lý Quỹ Toàn Diện
+        </a>
+                        <a href="fund.html#strategic_investment_gateway_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_fund_card1_title">
+            Cổng Kết Nối Đầu Tư Chiến Lược
+        </a>
+                        <a href="fund.html#consulting_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_consulting_title">
+            Tư vấn Doanh nghiệp &amp; Giải pháp Pháp lý Quy định
+        </a>
+                        <a href="fund.html#ma_title" class="block pl-16 pr-6 py-2 text-gray-300 text-xs hover:bg-white/5 hover:text-green-400 transition" data-i18n="sub_ma_title">
+            Tư Vấn Mua Bán &amp; Sáp Nhập Chiến Lược
+        </a>
+                    </div>
+
                 </div>
-            </div><a href="#" class="block text-white px-6 py-4 border-b border-white/10 transition font-medium" data-i18n="login">Đăng nhập</a><a href="#" class="block bg-green-500 text-white px-6 py-4 hover:bg-green-600 transition font-medium" data-i18n="signup">Đăng ký</a>
-        </div>
+                <!-- ===== END FUND MENU ===== -->
+
+
+
+                <a href="support.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="support">
+        Hỗ trợ
+    </a>
+
+                <!-- ===== LANGUAGE ===== -->
+                <div class="px-6 py-4 border-b border-white/10">
+
+                    <p class="text-white/70 text-sm mb-3" data-i18n="language">
+                        Ngôn ngữ
+                    </p>
+
+                    <div class="space-y-2">
+
+                        <button onclick="setLanguage('vi')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/vn.png" class="w-5 h-4">
+                <span>Tiếng Việt</span>
+            </button>
+
+                        <button onclick="setLanguage('en')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/gb.png" class="w-5 h-4">
+                <span>English</span>
+            </button>
+
+                        <button onclick="setLanguage('ja')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/jp.png" class="w-5 h-4">
+                <span>日本語</span>
+            </button>
+
+                    </div>
+                </div>
+
+            </div>
+
     </nav>
 
-    <script>
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+    <!-- ==================== HERO SECTION ==================== -->
+    <!-- Banner (hero) partial -->
+    <section id="heroSection" class="bg-[#001A21] relative overflow-hidden min-h-screen flex items-center justify-center">
+        <!-- Video Background -->
+        <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline poster="./assets/images/hero-poster.jpg">
+            <source src="./assets/video/Quản lý quỹ.mp4" type="video/mp4">
+        </video>
 
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+        <!-- Dark Overlay for better text readability -->
+        <div class="absolute inset-0 bg-black/40"></div>
 
-    <!-- ==================== HEADER ==================== -->
-    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed w-full z-50 border-b border-gray-100 hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-2">
-                    <div class="bg-gradient-to-br from-blue-600 to-indigo-600 p-2 rounded-lg shadow-md">
-                        <i data-lucide="wallet" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Remex.vn</span
-            >
-          </div>
-          <div class="hidden md:flex items-center gap-8">
-            <a
-              href="index.html"
-              class="text-gray-600 hover:text-blue-600 transition"
-              >Trang chủ</a
-            >
-            <a
-              href="p2p.html"
-              class="text-gray-600 hover:text-blue-600 transition"
-              >P2P Lending</a
-            >
-            <a
-              href="remittance.html"
-              class="text-gray-600 hover:text-blue-600 transition"
-              >Chuyển tiền & FX</a
-            >
-            <a href="fund.html" class="text-blue-600 font-semibold"
-              >Quản lý Quỹ</a
-            >
-            <button
-              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium"
-            >
-              Đăng nhập
-            </button>
-          </div>
-          <button id="mobileMenuBtn" class="md:hidden">
-            <i data-lucide="menu" class="w-6 h-6"></i>
-          </button>
-        </div>
-        <div id="mobileMenu" class="hidden md:hidden pb-4 space-y-3">
-          <a
-            href="index.html"
-            class="block px-4 py-2 hover:bg-blue-50 rounded-lg"
-            >Trang chủ</a
-          >
-          <a href="p2p.html" class="block px-4 py-2 hover:bg-blue-50 rounded-lg"
-            >P2P Lending</a
-          >
-          <a
-            href="remittance.html"
-            class="block px-4 py-2 hover:bg-blue-50 rounded-lg"
-            >Chuyển tiền & FX</a
-          >
-          <a
-            href="fund.html"
-            class="block px-4 py-2 bg-blue-50 rounded-lg font-medium"
-            >Quản lý Quỹ</a
-          >
-          <button
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-medium"
-          >
-            Đăng nhập
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <!-- ==================== MAIN CONTENT ==================== -->
-    <div class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <!-- Header + Stats -->
-      <div class="mb-12">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="icon-primary bg-green-600 p-3 rounded-xl">
-            <i data-lucide="wallet" class="w-8 h-8 text-white"></i>
-          </div>
-          <div>
-            <h1 class="text-4xl font-bold text-[#005C75]">Fund Management</h1>
-            <p class="text-lg text-gray-600">Quản lý quỹ đầu tư tư nhân</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-2xl font-bold text-green-600">$50B+</div>
-            <div class="text-sm text-gray-600">Tổng tài sản quản lý</div>
-          </div>
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-2xl font-bold text-blue-600">15.2%</div>
-            <div class="text-sm text-gray-600">Lợi nhuận TB</div>
-          </div>
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-2xl font-bold text-[#005C75]">25+</div>
-            <div class="text-sm text-gray-600">Quỹ đầu tư</div>
-          </div>
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <div class="text-2xl font-bold text-orange-600">10K+</div>
-            <div class="text-sm text-gray-600">Nhà đầu tư</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tabs -->
-      <div class="flex justify-center mb-10">
-        <div class="bg-white rounded-xl shadow-sm p-1 inline-flex">
-          <button
-            id="tab-overview"
-            class="tab-btn px-8 py-3 rounded-lg font-medium bg-primary is-active"
-          >
-            Tổng quan danh mục
-          </button>
-
-          <button
-            id="tab-funds"
-            class="tab-btn px-8 py-3 rounded-lg font-medium hover:bg-gray-100"
-          >
-            Khám phá quỹ
-          </button>
-        </div>
-      </div>
-
-
-      <!-- Tổng quan danh mục -->
-      <div id="overview-tab">
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
-          <div
-            class="bg-primary from-green-500 to-emerald-600 text-white rounded-xl p-6"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <i data-lucide="dollar-sign" class="w-8 h-8"></i>
-              <h3 class="text-xl font-bold">Tổng giá trị danh mục</h3>
-            </div>
-            <div class="text-4xl font-bold mb-4">$250,000</div>
-            <div class="flex items-center gap-2 text-green-100">
-              <i data-lucide="trending-up" class="w-5 h-5"></i>
-              <span>+15.8% tổng lợi nhuận</span>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <i data-lucide="trending-up" class="w-8 h-8 text-green-600"></i>
-                    <h3 class="text-xl font-bold text-gray-900">Lợi nhuận tháng</h3>
-                </div>
-                <div class="text-4xl font-bold text-green-600 mb-2">+2.1%</div>
-                <div class="text-sm text-gray-600">$5,250 lợi nhuận</div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <i data-lucide="pie-chart" class="w-8 h-8 text-blue-600"></i>
-                    <h3 class="text-xl font-bold text-gray-900">Số quỹ đã đầu tư</h3>
-                </div>
-                <div class="text-4xl font-bold text-blue-600 mb-2">4</div>
-                <div class="text-sm text-gray-600">Đa dạng hóa danh mục</div>
-            </div>
-        </div>
-
-        <!-- Phân bổ danh mục -->
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Phân bổ danh mục</h3>
-            <div class="space-y-6">
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="font-medium">Global Equity Fund</span>
-                        <span>$100,000 • 40%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-primary h-3 rounded-full" style="width: 40%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="font-medium">Balanced Growth Fund</span>
-                        <span>$75,000 • 30%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-primary h-3 rounded-full" style="width: 30%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="font-medium">Tech Innovation Fund</span>
-                        <span>$50,000 • 20%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-primary h-3 rounded-full" style="width: 20%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="font-medium">Conservative Bond Fund</span>
-                        <span>$25,000 • 10%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-primary h-3 rounded-full" style="width: 10%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
-                Biểu đồ hiệu suất
-            </h3>
-            <div class="h-64 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg flex items-center justify-center">
-                <div class="text-center text-gray-500">
-                    <i data-lucide="pie-chart" class="w-16 h-16 mx-auto mb-3 text-green-600"></i>
-                    <p class="text-lg">Biểu đồ hiệu suất sẽ hiển thị ở đây</p>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <!-- Khám phá quỹ -->
-        <div id="funds-tab" class="hidden">
-            <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-                <h3 class="text-xl font-bold text-green-900 mb-2">
-                    Quỹ đầu tư tư nhân
-                </h3>
-                <p class="text-gray-700">
-                    Các quỹ đầu tư được quản lý chuyên nghiệp, phù hợp cho nhà đầu tư cá nhân và tổ chức. Đầu tư đa dạng vào cổ phiếu, trái phiếu, bất động sản và các tài sản khác.
+        <div class="max-w-7xl mx-auto grid gap-12 items-center text-center w-full px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Text & Buttons -->
+            <div class="hero-content">
+                <h1 class="text-white text-4xl sm:text-5xl md:text-[58px] font-bold leading-tight mb-6 font-medium reveal-up">
+                    <span class="inline sm:block" data-i18n="fund-Title">Quản Lý Quỹ & Cổng Kết Nối Đầu Tư</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed reveal-up delay-1">
+                    <span data-i18n="fund-content">Triển khai vốn chiến lược và giải pháp tiếp cận thị trường cho các quỹ đầu tư quốc tế muốn thâm nhập thị trường Việt Nam</span>
                 </p>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-sm p-4 mb-8">
-                <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-1 relative">
-                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
-                        <input type="text" placeholder="Tìm kiếm quỹ đầu tư..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none" />
-                    </div>
-                    <button class="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50">
-              <i data-lucide="filter" class="w-4 h-4"></i>
-              Bộ lọc
-            </button>
+                <div class="mb-10 reveal-up delay-2">
+                    <!-- <button class="inline-flex items-center justify-center h-[48px] px-6 py-3 rounded-lg bg-[#00CC61] hover:bg-green-600 text-white text-base font-medium transition" data-i18n="exploreBtn">
+                    Khám phá giải pháp
+                </button>
+                    <button class="button-link inline-flex items-center justify-center h-[48px] px-3 py-[6px] rounded-lg  text-base font-medium text-white" data-i18n="whyChooseBtn">
+                    Vì sao chọn Remex GPS?
+                </button> -->
                 </div>
             </div>
-
-            <!-- Danh sách quỹ -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Quỹ 1 -->
-                <div class="fund-card bg-white rounded-xl shadow-md border border-gray-100 transition-all">
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900">
-                                    Global Equity Fund
-                                </h3>
-                                <p class="text-sm text-gray-500">Quỹ cổ phiếu toàn cầu</p>
-                            </div>
-                            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Cao</span
-                >
-              </div>
-              <p class="text-sm text-gray-600 mb-4">
-                Đầu tư vào cổ phiếu các công ty hàng đầu thế giới với tiềm năng
-                tăng trưởng cao.
-              </p>
-              <div
-                class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4"
-              >
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-sm text-gray-600">Lợi nhuận năm</span>
-                            <div class="flex items-center gap-1 text-green-600">
-                                <i data-lucide="trending-up" class="w-5 h-5"></i>
-                                <span class="text-2xl font-bold">18.5%</span>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2 text-center pt-3 border-t border-green-200 text-sm">
-                            <div>
-                                <div class="text-green-600">+2.3%</div>
-                                <div class="text-xs text-gray-500">1 tháng</div>
-                            </div>
-                            <div>
-                                <div class="text-green-600">+5.8%</div>
-                                <div class="text-xs text-gray-500">3 tháng</div>
-                            </div>
-                            <div>
-                                <div class="text-green-600">+18.5%</div>
-                                <div class="text-xs text-gray-500">1 năm</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <div class="bg-blue-50 rounded-lg p-3 text-center">
-                            <div class="text-xs text-gray-600 mb-1">AUM</div>
-                            <div class="text-blue-600 font-medium">2.5B USD</div>
-                        </div>
-                        <div class="bg-purple-50 rounded-lg p-3 text-center">
-                            <div class="text-xs text-gray-600 mb-1">Tối thiểu</div>
-                            <div class="text-primary font-medium">$10K</div>
-                        </div>
-                    </div>
-                    <div class="text-xs text-gray-500 mb-4">
-                        Quản lý bởi BlackRock Investment Management
-                    </div>
-                    <button onclick="openInvestDialog('Global Equity Fund','Quỹ cổ phiếu toàn cầu',18.5,'Cao',10000)" class="w-full bg-primary hover:bg-green-700 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2">
-                <i data-lucide="trending-up" class="w-5 h-5"></i>
-                Đầu tư ngay
-              </button>
-                </div>
-            </div>
-
-            <!-- Các quỹ khác tương tự... (mình để 1 mẫu, bạn có thể nhân bản 5 cái còn lại) -->
-            <!-- Quỹ 2: Conservative Bond Fund - Thấp - 6.2% - $5K -->
-            <!-- Quỹ 3: Tech Innovation Fund - Cao - 24.8% - $25K -->
-            <!-- v.v... -->
         </div>
-        </div>
+    </section>
 
-        <!-- CTA -->
-        <div class="mt-20 bg-primary from-green-600 to-emerald-600 rounded-2xl p-12 text-center text-white">
-            <h2 class="text-4xl font-bold mb-6">Cần tư vấn đầu tư?</h2>
-            <p class="text-xl text-green-100 mb-10 max-w-3xl mx-auto">
-                Đội ngũ chuyên gia quản lý quỹ của chúng tôi sẵn sàng tư vấn để giúp bạn xây dựng danh mục đầu tư phù hợp với mục tiêu tài chính
-            </p>
-            <div class="flex flex-wrap gap-6 justify-center">
-                <button class="bg-white text-primary px-10 py-5 rounded-xl text-lg font-bold hover:bg-gray-100 transition">
-            Đặt lịch tư vấn
-          </button>
-                <button class="border-2 border-white text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/10 transition">
-            Tải tài liệu
-          </button>
-            </div>
-        </div>
-        </div>
 
-        <!-- Invest Dialog -->
-        <div id="investDialog" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Đầu tư vào quỹ</h2>
-                <p class="text-gray-600 mb-6">
-                    Nhập số tiền bạn muốn đầu tư vào
-                    <span id="dialogFundName" class="font-semibold"></span>
-                </p>
-
-                <div class="bg-gray-50 rounded-lg p-6 mb-6 space-y-3 text-sm">
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Tên quỹ:</span>
-                        <span id="dialogName"></span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Loại quỹ:</span>
-                        <span id="dialogType"></span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Lợi nhuận năm:</span>
-                        <span id="dialogReturns" class="text-green-600 font-medium"></span>%
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Rủi ro:</span>
-                        <span id="dialogRisk"></span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-gray-600">Đầu tư tối thiểu:</span>
-                        <span id="dialogMin" class="font-medium"></span>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Số tiền đầu tư (USD)</label
-            >
-            <input
-              id="investAmount"
-              type="number"
-              placeholder="Nhập số tiền..."
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
-            />
-          </div>
-          <div
-            id="profitPreview"
-            class="hidden bg-green-50 border border-green-200 rounded-lg p-4"
-          >
-            <div class="text-sm text-gray-600 mb-1">
-              Lợi nhuận dự kiến (1 năm)
-            </div>
-            <div
-              id="expectedProfit"
-              class="text-2xl font-bold text-green-600"
-            ></div>
-            <div class="text-xs text-gray-500 mt-1">
-              Dựa trên lợi nhuận trung bình <span id="rateText"></span>%/năm
-            </div>
-          </div>
-        </div>
-
-        <div class="flex gap-4 mt-8">
-          <button
-            onclick="closeDialog()"
-            class="flex-1 px-6 py-4 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium"
-          >
-            Hủy
-          </button>
-          <button
-            id="confirmBtn"
-            onclick="alert('Đầu tư thành công! Chúng tôi sẽ liên hệ trong 24h.')"
-            disabled
-            class="flex-1 px-6 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium opacity-50 cursor-not-allowed"
-          >
-            Xác nhận đầu tư
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-[#002B36] text-gray-300 py-12">
+    <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- Cột chính: mobile 1 cột, căn giữa; desktop 3 cột -->
+            <!-- Tiêu đề section -->
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 reveal-up scroll-mt-[80px]" id="fund-management" data-i18n="fund_management_title">
+                    GIẢI PHÁP QUẢN LÝ QUỸ TOÀN DIỆN
+                </h2>
+                <p class="text-xl md:text-xl text-gray-700 max-w-5xl mx-auto reveal-up delay-1" data-i18n="fund_management_subtitle">
+                    Từ triển khai vốn đến thoái vốn, quản lý dòng quỹ cùng nhà đầu tư trong mọi giai đoạn
+                </p>
+            </div>
+
+            <!-- Grid: 2 cột → 2 hàng -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-left delay-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/dau-tu.png" alt="">
+                        <h3 class="text-2xl font-bold" data-i18n="fund_card1_title">
+                            ĐẦU TƯ SME & CỘNG HƯỞNG HỆ SINH THÁI
+                        </h3>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="fund_card1_desc">
+                        Sở hữu giấy phép Quản lý Quỹ chuyên dụng (Specialized Fund Management License), Remex GPS hỗ trợ triển khai đầu tư truc tiếp vào phân khúc SMEs đầy tiềm năng tại Việt Nam.
+                    </p>
+                    <ul class="space-y-3 text-left w-full text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card1_1">Strategic Equity Participation với tỷ lệ sở hữu lên đến 49%</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card1_2">Cấp vốn tăng trưởng (Growth Capital) cho SMEs</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card1_3">Tạo ra giá trị cộng hưởng (Operational Capital)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card1_4">Tích hợp vào hệ sinh thái thanh toán và công nghệ của Remex GPS</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card1_5">Gia tăng biên lợi nhuận doanh nghiệp (Valuation Uplift)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-right delay-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/kenh.png" alt="">
+
+                        <h3 class="text-2xl font-bold" data-i18n="fund_card2_title">
+                            KÊNH DẪN VỐN & DỊCH VỤ ỦY THÁC
+                        </h3>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="fund_card2_desc">
+                        Remex GPS định vị là kênh dận vốn (Vital Gateway) cho các Quỹ đầu tư nước ngoài và các Văn phòng quản lý gia sản muốn tham gia thị trường Việt Nam.
+                    </p>
+                    <ul class="space-y-3 text-left w-full text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card2_1">Tránh rủi ro về thành lập quỹ trực tiếp tại Việt Nam</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card2_2">Ủy thác dòng vốn qua các cấu trúc ủy thác (Investment Vehicle)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card2_3">Hoạt động theo cấu trúc ủy thác (Fiduciary Capacity)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card2_4">Đảm bảo tách biệt tài sản (Asset Segregation)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card2_5">Quản lý theo chỉ thị đầu tư (Investment Mandate)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-left delay-3">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/quan-tri-quy.png" alt="">
+
+                        <h3 class="text-2xl font-bold" data-i18n="fund_card3_title">
+                            QUẢN TRỊ QUỸ & LÀM CHỦ TUÂN THỦ
+                        </h3>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="fund_card3_desc">
+                        Với vai trò là Local Administrative Partner, Remex GPS chịu trách nhiệm toàn diện về tuân thủ theo "Sực khỏe pháp lý" của các khoản đầu tư.
+                    </p>
+                    <ul class="space-y-3 text-left w-full text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card3_1">Xử lý trình báo cáo tài chính (Back-office & IFRS)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card3_2">Thực hiện nghĩa vụ báo cáo định kỳ (Statutory Reporting)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card3_3">Bảo đảm tuân thủ ngân hàng và quản lý nhà nước</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card3_4">Tập trung vào chiến lược phân bổ tài sản (Asset Allocation)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-right delay-4">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/toi-uu-hoa.png" alt="">
+
+                        <h3 class="text-2xl font-bold" data-i18n="fund_card4_title">
+                            TỐI ƯU HÓA THOÁI VỐN & HỒI HƯỞNG LỢI NHUẬN
+                        </h3>
+                    </div>
+                    <p class="text-gray-600 mb-6" data-i18n="fund_card4_desc">
+                        Một trong những điểm mạnh lớn nhất của Remex GPS là hỗ trợ nhà đầu tư nước ngoài rút vốn an toàn và hiệu quả.
+                    </p>
+                    <ul class="space-y-3 text-left w-full text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card4_1">Tư vấn chiến lược thoái vốn (Exit Strategy) an toàn</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card4_2">Xử lý thuế chuyển nhượng doanh nghiệp (Capital Gains Tax)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card4_3">Tuân thủ định mức quản lý ngoại hối</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card4_4">Hồi hương lợi nhuận (Profit Repatriation) hợp pháp</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="fund_card4_5">Đảm bảo thanh khoản (Liquidity Event)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-20 color-bg-black text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Cột trái: Tiêu đề + 4 card -->
+                <div class="flex flex-col gap-8">
+                    <!-- Tiêu đề riêng cột trái -->
+                    <div class="text-center md:text-left mb-2">
+                        <h2 class="color-text-brand text-5xl md:text-4xl lg:text-5xl leading-tight font-bold tracking-wide mb-4 reveal-up scroll-mt-[80px]" id="strategic_investment_gateway_title" data-i18n="strategic_investment_gateway_title">
+                            CỔNG KẾT NỐI ĐẦU TƯ CHIẾN LƯỢC
+                        </h2>
+                        <p class="text-base md:text-lg opacity-90 leading-relaxed reveal-up delay-1" data-i18n="strategic_investment_gateway_desc">
+                            Remex GPS là cầu nối tin cậy giữa nhà đầu tư quốc tế và cơ hội đầu tư năng động tại thị trường Việt Nam. Chúng tôi hỗ trợ các quỹ nước ngoài và Family Offices triển khai vốn một cách an toàn, hiệu quả mà không cần phải đối mặt với các rào cản pháp lý
+                            phức tạp.
+                        </p>
+                    </div>
+
+                    <!-- 4 card -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Card 1 -->
+                        <div class="card-bg-brand rounded-3xl p-8 shadow-md transition-all duration-300 flex flex-col items-left text-left reveal-left delay-1 reveal-active">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4">
+                                <img src="./assets/images/fund/quan-ly-quy-gr.png" alt="">
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" data-i18n="card1_title">
+                                QUẢN LÝ QUỸ ĐƯỢC CẤP PHÉP
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed" data-i18n="card1_desc">
+                                Giấy phép Quản lý Quỹ chuyên dụng từ SSC Việt Nam, chuyển đổi dòng vốn quốc tế an toàn và minh bạch.
+                            </p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="card-bg-brand rounded-3xl p-8 shadow-md transition-all duration-300 flex flex-col items-left text-left reveal-right delay-2">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4">
+                                <img src="./assets/images/fund/bao-quan.png" alt="">
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" data-i18n="card2_title">
+                                BẢO TOÀN TÀI SẢN
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed" data-i18n="card2_desc">
+                                Tài sản được tách biệt hoàn toàn và quản lý minh bạch theo chuẩn quốc tế.
+                            </p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="card-bg-brand rounded-3xl p-8 shadow-md transition-all duration-300 flex flex-col items-left text-left reveal-left delay-3">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4">
+                                <img src="./assets/images/fund/tich-hop.png" alt="">
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" data-i18n="card3_title">
+                                TÍCH HỢP HỆ SINH THÁI
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed" data-i18n="card3_desc">
+                                Tích hợp vào hệ sinh thái fintech và thanh toán của Remex, tối ưu hóa hiệu quả vận hành.
+                            </p>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="card-bg-brand rounded-3xl p-8 shadow-md transition-all duration-300 flex flex-col items-left text-left reveal-right delay-4">
+                            <div class="w-14 h-14 flex items-center justify-center mb-4">
+                                <img src="./assets/images/fund/thanh-tich.png" alt="">
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" data-i18n="card4_title">
+                                THÀNH TÍCH HIỆU SUẤT
+                            </h3>
+                            <p class="text-gray-300 text-sm leading-relaxed" data-i18n="card4_desc">
+                                Lịch sử hiệu suất vượt trội trong các thương vụ đầu tư tại Việt Nam.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Hình ảnh -->
+                <div class="order-2 lg:order-2 flex justify-center reveal-right delay-1 reveal-active">
+                    <div class="relative max-w-lg w-full">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="./assets/images/fund/3.jpg" alt="Người thanh toán quốc tế bằng thẻ trên laptop" class="hidden lg:block w-full h-auto object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-br from-white to-blue-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Tiêu đề section -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 reveal-up scroll-mt-[80px]" id="consulting_title" data-i18n="consulting_title">Tư vấn Doanh nghiệp & Giải pháp Pháp lý Quy định</h2>
+                <p class="text-xl text-gray-600 max-w-7xl mx-auto reveal-up delay-1" data-i18n="consulting_subtitle">
+                    Định hướng thành công trong môi trường pháp lý phức tạp với đội ngũ chuyên gia hàng đầu
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-left delay-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/chien-luoc.png" alt="">
+                        <h3 class="text-2xl font-bold" data-i18n="entry_strategy_title">Chiến lược Gia nhập & Bản địa hóa</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-i18n="entry_strategy_desc">
+                        Việc điều hướng trong bối cảnh pháp lý tại Việt Nam đòi hỏi hiểu sâu về môi trường quy định và cách bản địa hóa mô hình kinh doanh quốc tế.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="regulatory_feasibility">Báo cáo khả thi pháp lý (Regulatory Feasibility Studies)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="market_entry_roadmap">Lộ trình gia nhập thị trường cho các tập đoàn quốc tế</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="localization_business_model">Bản địa hóa mô hình kinh doanh quốc tế</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="sustainable_compliance">Đảm bảo tuân thủ với quy định mà vẫn giữ lợi thế cạnh tranh</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-up delay-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/quan-tri.png" alt="">
+                        <h3 class="text-2xl font-bold" data-i18n="crisis_management_title">Quản trị Khủng hoảng & Giải pháp Tức thời</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-i18n="crisis_management_desc">
+                        Đối phó với các thách thức pháp lý đột ngột, cấp phép chậm trễ, hoặc khủng hoảng quy định.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="rapid_response">Phản ứng nhanh với các thay đổi pháp lý</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="licensing_hurdles">Giải quyết rào cản cấp phép hoặc thanh tra đột xuất</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="crisis_legal_support">Tư vấn khủng hoảng pháp lý</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="business_continuity">Duy trì hoạt động kinh doanh liên tục trong giai đoạn nhạy cảm</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col text-left reveal-right delay-3">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="./assets/images/fund/duy-tri.png" alt="">
+                        <h3 class="text-2xl font-bold" data-i18n="compliance_health_title">Duy trì Sức khỏe Tuân thủ</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-i18n="compliance_health_desc">
+                        Hạn chế rủi ro pháp lý lâu dài, xây dựng nền tảng tuân thủ vững chắc cho sự phát triển bền vững.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="compliance_audit">Rà soát tuân thủ định kỳ</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="regulatory_training">Cập nhật và đào tạo tuân thủ cho nhân sự</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="solid_legal_foundation">Xây dựng nền tảng pháp lý vững chắc</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="future_proof_compliance">Hỗ trợ hoạt động trong môi trường quy định tương lai</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 color-bg-black text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="color-text-brand text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide mb-4 reveal-up scroll-mt-[80px]" id="ma_title" data-i18n="ma_title">
+                    TƯ VẤN MUA BÁN & SÁP NHẬP CHIẾN LƯỢC
+                </h2>
+                <p class="text-xl md:text-xl opacity-90 max-w-5xl mx-auto reveal-up delay-1" data-i18n="ma_subtitle">
+                    Tư vấn toàn diện cho các thương vụ M&A giúp lập kế hoạch đến thực thi thành công
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="card-bg-brand rounded-3xl shadow-md rounded-3xl p-8 reveal-left delay-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center">
+                            <img src="./assets/images/fund/tu-van.png" alt="">
+                        </div>
+                        <h3 class="text-2xl font-bold" data-i18n="ma_card1_title">Tư vấn định giá & toàn diện</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6" data-i18n="ma_card1_desc">
+                        Tận dụng mạng lưới đối tác để đánh giá toàn diện các thương vụ M&A và sáp nhập.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card1_1">Tư vấn tài chính chuyên sâu (Deep Market Insights)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card1_2">Định giá tài sản & doanh nghiệp (Buy-side / Sell-side)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card1_3">Bình luận dòng vốn & nguồn vốn (Capital Arrangement)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card1_4">Hỗ trợ đến khi đóng giao dịch (Closing)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-bg-brand rounded-3xl shadow-md rounded-3xl p-8 reveal-up delay-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center">
+                            <img src="./assets/images/fund/tiep-can.png" alt="">
+                        </div>
+                        <h3 class="text-2xl font-bold" data-i18n="ma_card2_title">Tiếp cận thương vụ độc quyền & sàng lọc</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6" data-i18n="ma_card2_desc">
+                        Giải quyết vấn đề bất cân xứng thông tin trong thương vụ bằng cách tiếp cận độc quyền.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card2_1">Tiếp cận nguồn thương vụ độc quyền (Proprietary Deal Flow)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card2_2">Tiếp cận mục tiêu tiềm năng (Implant Targets)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card2_3">Sàng lọc chiến lược (Strategic Fit) và off-market deals</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-bg-brand rounded-3xl shadow-md rounded-3xl p-8 reveal-right delay-3">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center">
+                            <img src="./assets/images/fund/tu-van.png" alt="">
+                        </div>
+                        <h3 class="text-2xl font-bold" data-i18n="ma_card3_title">Thẩm định thương mại & hiện thực hóa cộng hưởng</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6" data-i18n="ma_card3_desc">
+                        Không chỉ dừng lại ở việc ký kết, chúng tôi hỗ trợ thực thi giá trị sau sáp nhập.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card3_1">Thẩm định chi tiết (Due Diligence)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card3_2">Chiến lược tích hợp sau sáp nhập (Post-Merger Integration - PMI)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="ma_card3_3">Hiện thực hóa cộng hưởng (Synergy Realization)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA-->
+    <section class="py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-gradient-to-r from-[#00BC7D] to-[#009689] rounded-3xl overflow-hidden shadow-2xl p-8 md:p-12 lg:p-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Cột trái: Text + Button -->
+                    <div>
+                        <h2 class="text-4xl md:text-5xl lg:text-5xl font-bold text-white lg:leading-[54px] mb-4 reveal-left" data-i18n="cta_heading">
+                            BẮT ĐẦU HÀNH TRÌNH TƯ VẤN NGAY HÔM NAY
+                        </h2>
+
+                        <p class="text-lg md:text-x text-white/90 leading-relaxed mb-10 reveal-left delay-1" data-i18n="cta_desc">
+                            Đăng ký tư vấn miễn phí với các chuyên gia của chúng tôi để khám phá cách Remex GPS có thể hỗ trợ doanh nghiệp của bạn đạt được mục tiêu chiến lược.
+                        </p>
+
+                        <a href="support.html" data-i18n="btn_book_consultation" class="inline-block bg-white text-[#059669] font-bold text-base md:text-lg py-3 md:py-4 px-8 md:px-10 rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300 reveal-left delay-2">
+            Đặt Lịch Tư Vấn 1:1 →
+                        </a>
+                    </div>
+
+                    <!-- Cột phải: Video -->
+                    <div class="flex items-center justify-center reveal-right delay-1">
+                        <div class="w-full max-w-sm lg:max-w-md h-80 md:h-96">
+                            <video class="w-full h-full rounded-3xl shadow-xl object-cover" autoplay muted loop playsinline poster="./assets/video/Video phần hỗ trợ.mp4">
+                                <source src="./assets/video/Video phần hỗ trợ.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-[#001A21] text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-[6fr_3fr_3fr] gap-4 lg:gap-40 mb-8 justify-items-center lg:justify-items-start text-center lg:text-left">
-                <!-- Cột 1: Logo + Mô tả -->
                 <div class="lg:col-span-1">
                     <div class="flex justify-center lg:justify-start items-center gap-4 mb-6">
-                        <img src="./assets/images/logo-remex.png" alt="ReMex" class="h-12">
+                        <img src="./assets/images/logo-remex.png" alt="Remex GPS" class="h-12">
                     </div>
                     <p class="text-sm leading-relaxed" data-i18n="footerDesc">
-                        ReMex là nền trung gian thanh toán xuyên biên giới đáng tin cậy, giúp chuyển tiền từ nước ngoài đến người nhận tại Việt Nam một cách an toàn và hợp pháp.
+                        Remex GPS là nền trung gian thanh toán xuyên biên giới đáng tin cậy, giúp chuyển tiền từ nước ngoài đến người nhẫn tại Việt Nam một cách an toàn và hợp pháp.
                     </p>
                 </div>
-                <!-- Cột 2: Công ty -->
                 <div>
                     <h4 class="text-white font-semibold text-lg mb-6" data-i18n="company">Công ty</h4>
                     <ul class="space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-green-400 transition" data-i18n="about">Về ReMex</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition" data-i18n="recruitment">Tuyển dụng</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition" data-i18n="news">Tin tức</a></li>
+                        <li><a href="about.html" class="hover:text-green-400 transition" data-i18n="about">Về Remex GPS</a></li>
+                        <li><a href="support.html" class="hover:text-green-400 transition" data-i18n="support_footer">Hỗ trợ khách hàng</a></li>
+                        <!-- <li><a href="recruitment.html" class="hover:text-green-400 transition" data-i18n="recruitment">Tuyển dụng</a></li>
+                        <li><a href="news.html" class="hover:text-green-400 transition" data-i18n="news">Tin tức</a></li> -->
                     </ul>
                 </div>
-                <!-- Cột 3: Sản phẩm -->
                 <div>
                     <h4 class="text-white font-semibold text-lg mb-6" data-i18n="products">Sản phẩm</h4>
                     <ul class="space-y-4 text-sm">
-                        <li><a href="remittance.html" class="hover:text-green-400 transition" data-i18n="remittance">Chuyển tiền và FX</a></li>
+                        <li><a href="cross.html" class="hover:text-green-400 transition" data-i18n="fund_cross_border">Thanh toán xuyên biên giới</a></li>
                         <li><a href="fund.html" class="hover:text-green-400 transition" data-i18n="fund">Quản lý quỹ</a></li>
+                        <!-- <li><a href="final.html" class="hover:text-green-400 transition" data-i18n="fund_consulting">Tư vấn tài chính</a></li> -->
                     </ul>
                 </div>
             </div>
-
-            <!-- Hỗ trợ -->
             <div class="w-full mb-8 text-center lg:text-left">
                 <div class="rounded-lg">
                     <h4 class="text-white font-semibold text-lg mb-6" data-i18n="support">Hỗ trợ</h4>
-                    <ul class="flex flex-col md:flex-row gap-6 w-full text-center md:text-left items-center md:items-start">
+                    <ul class="flex flex-col md:flex-row gap-6 w-full text-center lg:text-left items-center lg:items-start lg:justify-start justify-center">
                         <li class="flex items-center justify-center w-full md:w-auto">
                             <i class="fas fa-phone-alt text-green-400"></i>
                             <span data-i18n="hotline">Hotline: 1900-xxx</span>
                         </li>
-                        <li class="flex items-center justify-center gap-3 w-full md:w-auto">
-                            <i class="fab fa-zalo text-green-400 text-xl"></i>
-                            <a href="#" class="hover:text-green-400 transition" data-i18n="zalosupport">Zalo Support</a>
+                        <li class="w-full md:w-auto">
+                            <div class="flex justify-center gap-6 md:gap-4">
+                                <a href="https://www.linkedin.com/company/remex-global-payment-services-jsc" target="_blank" rel="noopener noreferrer" aria-label="linkedin">
+                                    <img src="./assets/images/icon/lin.png" class="w-[20px] h-[20px]">
+                                </a>
+
+                                <a href="https://www.facebook.com/remex.vn" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <img src="./assets/images/logo/logo-fb.png" class="w-[20px] h-[20px]">
+                                </a>
+                            </div>
                         </li>
-                        <li class="flex items-center justify-center gap-3 w-full md:w-auto">
-                            <i class="fab fa-whatsapp text-green-400 text-xl"></i>
-                            <a href="#" class="hover:text-green-400 transition" data-i18n="whatsappsupport">WhatsApp Support</a>
-                        </li>
+
                     </ul>
 
                 </div>
             </div>
-
-            <!-- Dòng dưới cùng -->
-            <div class="flex flex-col md:flex-row justify-center md:justify-between items-center text-sm text-center md:text-left">
-                <p data-i18n="copyright">© 2025 ReMex.vn. All rights reserved.</p>
-                <div class="flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 justify-center md:justify-start">
+            <div class="flex flex-col md:flex-row justify-center md:justify-center items-center text-sm text-center md:text-left">
+                <p id="copyright">
+                    © <span id="year">2026</span> Remex.vn. <span data-i18n="copyright">Bản quyền thuộc về Remex.vn.</span>
+                </p>
+                <!-- <div class="flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 justify-center md:justify-start">
                     <a href="privacy.html" class="hover:text-green-400 transition" data-i18n="privacy">Chính sách bảo mật</a>
                     <a href="terms.html" class="hover:text-green-400 transition" data-i18n="terms">Điều khoản dịch vụ</a>
                     <a href="compliance.html" class="hover:text-green-400 transition" data-i18n="complianceLink">Tuân thủ pháp luật</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 
     <script>
-      lucide.createIcons();
-
-      // Mobile menu
-      document.getElementById("mobileMenuBtn").addEventListener("click", () => {
-        document.getElementById("mobileMenu").classList.toggle("hidden");
-        const isHidden = document
-          .getElementById("mobileMenu")
-          .classList.contains("hidden");
-        document.getElementById("mobileMenuBtn").innerHTML = `<i data-lucide="${
-          isHidden ? "menu" : "x"
-        }" class="w-6 h-6"></i>`;
         lucide.createIcons();
-      });
 
-      // Tabs
-      document.getElementById("tab-overview").addEventListener("click", () => {
-        document.getElementById("overview-tab").classList.remove("hidden");
-        document.getElementById("funds-tab").classList.add("hidden");
-        document
-          .getElementById("tab-overview")
-          .classList.add("bg-green-600", "text-white");
-        document
-          .getElementById("tab-funds")
-          .classList.remove("bg-green-600", "text-white");
-      });
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-      document.getElementById("tab-funds").addEventListener("click", () => {
-        document.getElementById("funds-tab").classList.remove("hidden");
-        document.getElementById("overview-tab").classList.add("hidden");
-        document
-          .getElementById("tab-funds")
-          .classList.add("bg-green-600", "text-white");
-        document
-          .getElementById("tab-overview")
-          .classList.remove("bg-green-600", "text-white");
-      });
-
-      // Dialog
-      let currentFund = {};
-      function openInvestDialog(name, type, returns, risk, min) {
-        currentFund = {
-          name,
-          type,
-          returns: parseFloat(returns),
-          risk,
-          min: parseFloat(min),
-        };
-        document.getElementById("dialogFundName").textContent = name;
-        document.getElementById("dialogName").textContent = name;
-        document.getElementById("dialogType").textContent = type;
-        document.getElementById("dialogReturns").textContent = returns;
-        document.getElementById("dialogRisk").textContent = risk;
-        document.getElementById("dialogMin").textContent =
-          "$" + min.toLocaleString();
-        document.getElementById("rateText").textContent = returns;
-        document.getElementById("investDialog").classList.remove("hidden");
-        document.getElementById("investAmount").value = "";
-        document.getElementById("profitPreview").classList.add("hidden");
-        document.getElementById("confirmBtn").disabled = true;
-        document
-          .getElementById("confirmBtn")
-          .classList.add("opacity-50", "cursor-not-allowed");
-      }
-
-      function closeDialog() {
-        document.getElementById("investDialog").classList.add("hidden");
-      }
-
-      // Tính lợi nhuận dự kiến
-      document
-        .getElementById("investAmount")
-        .addEventListener("input", function () {
-          const amount = parseFloat(this.value);
-          if (amount && amount >= currentFund.min) {
-            const profit = (amount * currentFund.returns) / 100;
-            document.getElementById("expectedProfit").textContent =
-              "$" + profit.toLocaleString();
-            document.getElementById("profitPreview").classList.remove("hidden");
-            document.getElementById("confirmBtn").disabled = false;
-            document
-              .getElementById("confirmBtn")
-              .classList.remove("opacity-50", "cursor-not-allowed");
-          } else {
-            document.getElementById("profitPreview").classList.add("hidden");
-            document.getElementById("confirmBtn").disabled = true;
-            document
-              .getElementById("confirmBtn")
-              .classList.add("opacity-50", "cursor-not-allowed");
-          }
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const svg = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
         });
 
-      // Close dialog khi click ngoài
-      document.getElementById("investDialog").addEventListener("click", (e) => {
-        if (e.target === document.getElementById("investDialog")) closeDialog();
-      });
+        lucide.createIcons();
     </script>
-    
+    <script src="./assets/js/custom.js"></script>
+    <script src="./assets/js/animation.js"></script>
     <script>
-    const tabs = document.querySelectorAll('.tab-btn');
+        const track = document.getElementById('logoTrack');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('is-active', 'bg-primary'));
-        tab.classList.add('is-active', 'bg-primary');
-      });
-    });
-  </script>
+        const totalItems = track.children.length;
+        let index = 0;
 
-  </body>
+        function update() {
+            track.style.transform = `translateX(-${index * 50}%)`;
+        }
+
+        next.addEventListener('click', () => {
+            if (index < totalItems - 2) {
+                index++;
+                update();
+            }
+        });
+
+        prev.addEventListener('click', () => {
+            if (index > 0) {
+                index--;
+                update();
+            }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.social-link').forEach(link => {
+            if (link.dataset.disabled === 'false') {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    window.open(link.href, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+
 </html>

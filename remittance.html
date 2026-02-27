@@ -4,10 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chuyển tiền quốc tế & FX - Remex.vn</title>
+    <title data-i18n="remittancePageTitle">Chuyển tiền quốc tế & FX - Remex GPS.vn</title>
     <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/support.css" />
+    <link rel="stylesheet" href="assets/css/animation.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/language.js"></script>
+    <script src="./assets/js/custom.js"></script>
+
 
     <style>
         @keyframes blob {
@@ -47,6 +52,11 @@
             background-color: #DFFFF0 !important;
             color: #00A84F;
         }
+        /* ensure anchor targets are visible under the fixed header */
+        
+        html {
+            scroll-padding-top: 80px;
+        }
         
         .icon-primary i,
         .icon-primary svg {
@@ -58,47 +68,65 @@
 <body class="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 relative overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav class="bg-[#004050] fixed w-full top-0 z-50">
+
+    <nav class="bg-[#001A21] fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="index.html" class="flex items-center gap-3">
-                    <img src="./assets/images/logo-remex.png" alt="Remex" class="h-9"></a>
+                    <img src="./assets/images/logo-remex.png" alt="Remex GPS" class="h-9"></a>
             </div>
             <!-- Desktop Menu - Fixed gap 88px để khớp chính xác devtools -->
             <div class="hidden lg:flex items-center gap-[50px] text-base font-medium leading-6"><a href="index.html" class="text-white hover:text-green-400 transition" data-i18n="home">Trang chủ</a>
-                <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & FX</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a>
-                <a href="fund.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="fund">Quản lý Quỹ</span><i data-lucide="chevron-down" class="w-4 h-4"></i></a><a href="about.html" class="text-white hover:text-green-400 transition"
-                    data-i18n="about">Về Remex</a>
+                <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & Ngoại hối</span></a>
+                <div class="relative group">
+                    <a href="#" class="text-white hover:text-green-400 transition flex items-center gap-1">
+                        <span data-i18n="fund">Giải pháp dịch vụ</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+
+                    <!-- Sub menu -->
+                    <div class="absolute top-full left-0 mt-2 w-56 bg-[#001A21] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+
+                        <a href="#" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition" data-i18n="fund_cross_border">
+                        Cross border payment
+                    </a>
+
+                        <a href="fund.html" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition" data-i18n="fund_management">
+                        Fund Management
+                    </a>
+
+                        <a href="#" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition" data-i18n="fund_consulting">
+                        Consulting
+                    </a>
+                    </div>
+                </div>
+
+                <a href="about.html" class="text-white hover:text-green-400 transition" data-i18n="about">Về Remex GPS</a>
                 <a href="support.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="support">Hỗ trợ</span></a>
             </div>
             <!-- Right Side: Language + Buttons -->
             <div class="flex items-center gap-4">
                 <!-- Language Selector Dropdown -->
                 <div class="hidden md:block relative group">
-                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector>
-            <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
-          </button>
+                    <!-- <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector> -->
+                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-white/30" data-lang-selector>
+                        <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
                     <!-- Dropdown Menu -->
                     <div class="hidden absolute right-0 mt-0 w-48 bg-[#003746] border border-white/20 rounded-lg shadow-lg group-hover:block z-50">
                         <button onclick="setLanguage('vi')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
               <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
             </button>
                         <button onclick="setLanguage('en')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
-              <img src="https://flagcdn.com/24x18/us.png" alt="English" class="w-5 h-4"><span>English</span>
+              <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-4"><span>English</span>
             </button>
                         <button onclick="setLanguage('ja')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3">
               <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
             </button>
                     </div>
                 </div>
-                <!-- Buttons -->
-                <a href="#" class="text-white hidden md:block px-3 py-[6px] rounded-[12px] font-medium hover:bg-white/10 transition" data-i18n="login">
-                Đăng nhập</a><a href="#" class="inline-flex items-center gap-2 h-[36px] px-3 py-[6px] rounded-lg bg-[#00CC61] hover:bg-[#00b857] text-white text-base font-medium transition" data-i18n="signup">
-                Đăng ký
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"  />
-                </svg></a>
+
                 <!-- Mobile Hamburger -->
                 <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,329 +137,403 @@
             </div>
         </div>
         <!-- Mobile Menu (giữ đồng nhất như trước) -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-[#004050] border-t border-white/10">
-            <!-- Nội dung mobile menu giống phiên bản trước, với ngôn ngữ và buttons --><a href="index.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="home">Trang chủ</a><a href="remittance.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition"
-                data-i18n="remittance">Chuyển tiền & FX</a><a href="fund.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="fund">Quản lý Quỹ</a><a href="about.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition"
-                data-i18n="about">Về Remex</a><a href="support.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="support">Hỗ trợ</a>
-            <!-- Mobile Language Selector -->
-            <div class="px-6 py-4 border-b border-white/10">
-                <p class="text-white/70 text-sm mb-3" data-i18n="language">Ngôn ngữ</p>
-                <div class="space-y-2">
-                    <button onclick="setLanguage('vi')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
-          <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
+        <div id="mobile-menu" class="hidden lg:hidden
+           bg-[#001A21]
+           border-t border-white/10
+           min-h-screen
+           h-screen
+           overflow-y-auto">
+
+            <a href="index.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="home">
+        Trang chủ
+    </a>
+
+            <a href="remittance.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="remittance">
+        Chuyển tiền & Ngoại hối
+    </a>
+
+            <!-- ===== FUND MENU ===== -->
+            <div class="border-b border-white/10">
+
+                <!-- Menu cha -->
+                <button type="button" onclick="toggleFundMenu()" class="w-full flex items-center justify-between
+                   text-white px-6 py-4 hover:bg-white/5 transition">
+
+            <span data-i18n="fund">Giải pháp dịch vụ</span>
+
+            <!-- icon -->
+            <svg id="fund-arrow"
+                 class="w-4 h-4 transition-transform duration-200"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
         </button>
-                    <button onclick="setLanguage('en')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
-          <img src="https://flagcdn.com/24x18/us.png" alt="English" class="w-5 h-4"><span>English</span>
-        </button>
-                    <button onclick="setLanguage('ja')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
-          <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
-        </button>
+
+                <!-- Sub menu -->
+                <div id="fund-submenu" class="hidden bg-[#001A21]">
+
+                    <a href="#" class="block pl-12 pr-6 py-3 text-white text-sm hover:bg-white/5 transition" data-i18n="fund_cross_border">
+                Cross border payment
+            </a>
+
+                    <a href="fund.html" class="block pl-12 pr-6 py-3 text-white text-sm hover:bg-white/5 transition" data-i18n="fund_management">
+                Fund Management
+            </a>
+
+                    <a href="#" class="block pl-12 pr-6 py-3 text-white text-sm hover:bg-white/5 transition" data-i18n="fund_consulting">
+                Consulting
+            </a>
                 </div>
-            </div><a href="#" class="block text-white px-6 py-4 border-b border-white/10 transition font-medium" data-i18n="login">Đăng nhập</a><a href="#" class="block bg-green-500 text-white px-6 py-4 hover:bg-green-600 transition font-medium" data-i18n="signup">Đăng ký</a>
+            </div>
+            <!-- ===== END FUND MENU ===== -->
+
+            <a href="about.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="about">
+        Về Remex GPS
+    </a>
+
+            <a href="support.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="support">
+        Hỗ trợ
+    </a>
+
+            <!-- ===== LANGUAGE ===== -->
+            <div class="px-6 py-4 border-b border-white/10">
+
+                <p class="text-white/70 text-sm mb-3" data-i18n="language">
+                    Ngôn ngữ
+                </p>
+
+                <div class="space-y-2">
+
+                    <button onclick="setLanguage('vi')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/vn.png" class="w-5 h-4">
+                <span>Tiếng Việt</span>
+            </button>
+
+                    <button onclick="setLanguage('en')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/gb.png" class="w-5 h-4">
+                <span>English</span>
+            </button>
+
+                    <button onclick="setLanguage('ja')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/jp.png" class="w-5 h-4">
+                <span>日本語</span>
+            </button>
+
+                </div>
+            </div>
+
         </div>
+
     </nav>
 
     <!-- ==================== NỘI DUNG REMITTANCE HOÀN CHỈNH ==================== -->
-    <div class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="pt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white reveal-up delay-1">
         <!-- Header Section -->
-        <div class="mb-12">
+        <div class="mb-12 reveal-up delay-2">
             <div class="flex items-center gap-3 mb-4">
                 <div class="bg-purple-600 p-3 rounded-xl icon-primary">
                     <i data-lucide="arrow-right-left" class="w-8 h-8 text-white"></i>
                 </div>
                 <div>
-                    <h1 class="text-4xl font-bold text-[#005C75]">
-                        Remittance & Foreign Exchange
+                    <h1 class="text-xl md:text-4xl font-bold text-[#212529]" data-i18n="transferPageTitle">
+                        Chuyển tiền và ngoại hối
                     </h1>
-                    <p class="text-gray-600 text-lg">
-                        Chuyển tiền quốc tế và đổi ngoại tệ
+                    <p class="text-lg md:text-xl text-gray-600" data-i18n="transferPageSubtitle">
+                        Chuyển tiền quốc tế siêu đơn giản
                     </p>
+
                 </div>
             </div>
 
             <!-- Stats -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center reveal-left delay-3">
                     <div class="text-2xl font-bold text-[#005C75]">150+</div>
-                    <div class="text-sm text-gray-600">Quốc gia</div>
+                    <div class="text-sm text-gray-600" data-i18n="countriesLabel">Quốc gia</div>
                 </div>
-                <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-                    <div class="text-2xl font-bold text-green-600">1%</div>
-                    <div class="text-sm text-gray-600">Phí giao dịch</div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center reveal-up delay-3">
+                    <div class="text-2xl font-bold text-[#005C75]">1%</div>
+                    <div class="text-sm text-gray-600" data-i18n="feeLabel">Phí giao dịch</div>
                 </div>
-                <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-                    <div class="text-2xl font-bold text-blue-600">&lt;24h</div>
-                    <div class="text-sm text-gray-600">Thời gian xử lý</div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center reveal-up delay-4">
+                    <div class="text-2xl font-bold text-[#005C75]">&lt;24h</div>
+                    <div class="text-sm text-gray-600" data-i18n="processingTimeLabel">Thời gian xử lý</div>
                 </div>
-                <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-                    <div class="text-2xl font-bold text-orange-600">$500M+</div>
-                    <div class="text-sm text-gray-600">Giao dịch/tháng</div>
+                <div class="bg-white rounded-lg shadow-sm p-4 text-center reveal-right delay-4">
+                    <div class="text-2xl font-bold text-[#005C75]">$500M+</div>
+                    <div class="text-sm text-gray-600" data-i18n="monthlyTransactionsLabel">Giao dịch/tháng</div>
                 </div>
             </div>
         </div>
 
         <!-- Benefits -->
         <div class="grid md:grid-cols-4 gap-6 mb-12">
-            <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <div class="bg-white rounded-lg shadow-sm p-6 text-center reveal-left delay-3">
                 <div class="bg-sky-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="zap" class="w-6 h-6 text-[#005C75]"></i>
                 </div>
-                <h3 class="text-gray-900 font-semibold mb-2">Nhanh chóng</h3>
-                <p class="text-sm text-gray-600">Chuyển tiền trong vòng 24 giờ</p>
+                <h3 class="text-gray-900 font-semibold mb-2" data-i18n="fastTitle">Nhanh chóng</h3>
+                <p class="text-sm text-gray-600" data-i18n="fastDesc">Chuyển tiền trong vòng 24 giờ</p>
             </div>
-            <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <div class="bg-white rounded-lg shadow-sm p-6 text-center reveal-left delay-4">
                 <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="dollar-sign" class="w-6 h-6 text-green-600"></i>
                 </div>
-                <h3 class="text-gray-900 font-semibold mb-2">Phí thấp</h3>
-                <p class="text-sm text-gray-600">Chỉ 1% phí giao dịch</p>
+                <h3 class="text-gray-900 font-semibold mb-2" data-i18n="lowFeeTitle">Phí thấp</h3>
+                <p class="text-sm text-gray-600" data-i18n="lowFeeDesc">Chỉ 1% phí giao dịch</p>
             </div>
-            <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <div class="bg-white rounded-lg shadow-sm p-6 text-center reveal-right delay-4">
                 <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="shield" class="w-6 h-6 text-blue-600"></i>
                 </div>
-                <h3 class="text-gray-900 font-semibold mb-2">An toàn</h3>
-                <p class="text-sm text-gray-600">Bảo mật cấp ngân hàng</p>
+                <h3 class="text-gray-900 font-semibold mb-2" data-i18n="secureTitle">An toàn</h3>
+                <p class="text-sm text-gray-600" data-i18n="secureDesc">Bảo mật cấp ngân hàng</p>
             </div>
-            <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+            <div class="bg-white rounded-lg shadow-sm p-6 text-center reveal-right delay-5">
                 <div class="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="clock" class="w-6 h-6 text-orange-600"></i>
                 </div>
-                <h3 class="text-gray-900 font-semibold mb-2">24/7</h3>
-                <p class="text-sm text-gray-600">Hỗ trợ mọi lúc mọi nơi</p>
+                <h3 class="text-gray-900 font-semibold mb-2" data-i18n="support247Title">24/7</h3>
+                <p class="text-sm text-gray-600" data-i18n="support247Desc">Hỗ trợ mọi lúc mọi nơi</p>
             </div>
         </div>
 
         <!-- Main Content: Form + Rates -->
-        <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Transfer Form (2 cột) -->
-            <div class="lg:col-span-2 space-y-8">
-                <!-- Form chuyển tiền -->
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">
-                        Chuyển tiền quốc tế
-                    </h3>
-                    <form class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
+        <div class="w-full px-4 md:px-8 py-6 md:py-12">
+            <!-- Main Content: Form + Rates -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+
+
+                <div class="lg:col-span-2 reveal-up delay-3">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-6 text-center" data-i18n="internationalTransferTitle">
+                            Chuyển tiền quốc tế
+                        </h3>
+                        <form class="space-y-6">
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="youSendLabel">Bạn gửi</label>
+                                    <div class="flex">
+                                        <select class="w-20 md:w-32 px-2 md:px-3 py-2 md:py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-sm md:text-base">
+                                        <option>VND</option>
+                                        <option>USD</option>
+                                        <option>EUR</option>
+                                    </select>
+                                        <input type="number" placeholder="10,000,000" class="flex-1 px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-purple-500 focus:outline-none text-sm md:text-base" />
+                                    </div>
+                                </div>
+
+                                <!-- Recipient Receives -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="recipientReceivesLabel">Người nhận được</label>
+                                    <div class="flex">
+                                        <select class="w-20 md:w-32 px-2 md:px-3 py-2 md:py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 text-sm md:text-base">
+                                        <option>USD</option>
+                                        <option>EUR</option>
+                                        <option>SGD</option>
+                                    </select>
+                                        <input type="text" value="423.50" readonly class="flex-1 px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-r-lg bg-gray-50 text-gray-900 font-medium text-sm md:text-base" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Country and Method -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="receivingCountryLabel">Quốc gia gửi tiền</label>
+                                    <select class="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 text-sm md:text-base">
+                                    <option data-i18n="Americads">Hoa Kỳ</option>
+                                    <option>Úc</option>
+                                    <option>Châu Âu</option>
+                                    <option>Singapore</option>
+                                </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="receivingMethodLabel">Phương thức nhận</label>
+                                    <select class="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 text-sm md:text-base">
+                                    <option data-i18n="bankds">Tài khoản ngân hàng</option>
+                                    <option>Ví điện tử</option>
+                                    <option>Nhận tiền mặt</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <!-- Recipient Info -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Bạn gửi</label
-                  >
-                  <div class="flex">
-                    <select
-                      class="w-32 px-3 py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50"
-                    >
-                      <option>VND</option>
-                      <option>USD</option>
-                      <option>EUR</option>
-                    </select>
-                    <input
-                      type="number"
-                      placeholder="10,000,000"
-                      class="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Người nhận được</label
-                  >
-                  <div class="flex">
-                    <select
-                      class="w-32 px-3 py-3 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50"
-                    >
-                      <option>USD</option>
-                      <option>EUR</option>
-                      <option>SGD</option>
-                    </select>
-                    <input
-                      type="text"
-                      value="423.50"
-                      readonly
-                      class="flex-1 px-4 py-3 border border-gray-300 rounded-r-lg bg-gray-50 text-gray-900 font-medium"
-                    />
-                  </div>
-                </div>
-              </div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="recipientInfoLabel">Thông tin người nhận</label>
+                                <div class="space-y-4">
+                                    <input type="text" placeholder="Họ và tên" data-i18n="recipientNamePlaceholder" class="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg bg-gray-50 focus:placeholder-transparent text-sm md:text-base" />
+                                    <input type="text" placeholder="Số tài khoản / Số điện thoại" data-i18n="accountNumberPlaceholder" class="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg bg-gray-50 focus:placeholder-transparent text-sm md:text-base" />
+                                </div>
+                            </div>
 
-              <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Quốc gia nhận</label
-                  >
-                  <select
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  >
-                    <option>Hoa Kỳ</option>
-                    <option>Úc</option>
-                    <option>Châu Âu</option>
-                    <option>Singapore</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Phương thức nhận</label
-                  >
-                  <select
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
-                  >
-                    <option>Tài khoản ngân hàng</option>
-                    <option>Ví điện tử</option>
-                    <option>Nhận tiền mặt</option>
-                  </select>
-                </div>
-              </div>
+                            <!-- Fee Info -->
+                            <div class="bg-emerald-50 rounded-lg p-4">
+                                <div class="flex flex-col md:flex-row md:justify-between text-sm mb-2 gap-2">
+                                    <span data-i18n="exchangeRateTodayLabel"></span>
 
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2"
-                  >Thông tin người nhận</label
-                >
-                <input
-                  type="text"
-                  placeholder="Họ tên người nhận"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3"
-                />
-                <input
-                  type="text"
-                  placeholder="Số tài khoản / IBAN / Số điện thoại"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg"
-                />
-              </div>
+                                    <span class="font-medium text-[#008240]" data-i18n="exchangeRateTodayFormat" data-rate="25360">
+    </span>
+                                </div>
 
-              <div class="bg-emerald-50 rounded-lg p-4">
-                <div class="flex justify-between text-sm mb-2">
-                  <span>Tỷ giá hôm nay:</span>
-                    <span class="font-bold text-[#005C75]">1 USD = 25,360 VND</span
-                  >
+                                <div class="flex flex-col md:flex-row md:justify-between text-sm gap-2">
+                                    <span data-i18n="transactionFeeLabel"></span>
+
+                                    <span class="font-medium text-[#008240]" data-i18n="transactionFeeFormat" data-fee="100000" data-percent="1">
+    </span>
+                                </div>
+
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="w-full bg-[#005C75] text-white py-3 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:opacity-90 transition" data-i18n="continueTransferButton">
+                            Tiếp tục chuyển tiền
+                        </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="flex justify-between text-sm">
-                  <span>Phí giao dịch (1%):</span>
-                    <span class="font-medium">100,000 VND</span>
+
+                <!-- Exchange Rates -->
+                <div class="lg:sticky lg:top-6 reveal-right delay-3">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 text-center lg:text-left" data-i18n="todayExchangeRatesTitle">
+                            Tỷ giá ngoại tệ hôm nay
+                        </h3>
+
+                        <div class="space-y-3">
+                            <!-- USD Rate 1 -->
+                            <div class="flex justify-between items-center p-3 md:p-4 bg-gray-50 rounded-lg border gap-2">
+                                <div class="flex flex-col justify-center items-center">
+                                    <span class="text-base md:text-lg font-semibold text-gray-900">USD</span>
+                                    <span class="text-xs md:text-sm text-gray-400">USD/VND</span>
+                                </div>
+                                <div class="flex flex-col justify-center items-end">
+                                    <span class="font-semibold text-gray-900 text-sm md:text-base">25,180</span>
+                                    <span class="text-xs md:text-sm text-green-600">+0.15%</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-600"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- EUR Rate 1 -->
+                            <div class="flex justify-between items-center p-3 md:p-4 bg-gray-50 rounded-lg border gap-2">
+                                <div class="flex flex-col justify-center items-center">
+                                    <span class="text-base md:text-lg font-semibold text-gray-900">EUR</span>
+                                    <span class="text-xs md:text-sm text-gray-500">EUR/VND</span>
+                                </div>
+                                <div class="flex flex-col justify-center items-end">
+                                    <span class="font-semibold text-gray-900 text-sm md:text-base">28,136</span>
+                                    <span class="text-xs md:text-sm text-red-600">-0.08%</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-red-600"><path d="m7 7 10 10"></path><path d="M17 7v10H7"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- USD Rate 2 -->
+                            <div class="flex justify-between items-center p-3 md:p-4 bg-gray-50 rounded-lg border gap-2">
+                                <div class="flex flex-col justify-center items-center">
+                                    <span class="text-base md:text-lg font-semibold text-gray-900">SGD</span>
+                                    <span class="text-xs md:text-sm text-gray-400">SGD/VND</span>
+                                </div>
+                                <div class="flex flex-col justify-center items-end">
+                                    <span class="font-semibold text-gray-900 text-sm md:text-base">19,280</span>
+                                    <span class="text-xs md:text-sm text-green-600">+0.23%</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-600"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+
+                                </div>
+                            </div>
+
+                            <!-- USD Rate 3 -->
+                            <div class="flex justify-between items-center p-3 md:p-4 bg-gray-50 rounded-lg border gap-2">
+                                <div class="flex flex-col justify-center items-center">
+                                    <span class="text-base md:text-lg font-semibold text-gray-900">AUD</span>
+                                    <span class="text-xs md:text-sm text-gray-400">AUD/VND</span>
+                                </div>
+                                <div class="flex flex-col justify-center items-end">
+                                    <span class="font-semibold text-gray-900 text-sm md:text-base">17,405</span>
+                                    <span class="text-xs md:text-sm text-green-600">+0.12%</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-green-600"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+
+                                </div>
+                            </div>
+
+                            <!-- EUR Rate 2 -->
+                            <div class="flex justify-between items-center p-3 md:p-4 bg-gray-50 rounded-lg border gap-2">
+                                <div class="flex flex-col justify-center items-center">
+                                    <span class="text-base md:text-lg font-semibold text-gray-900">GBP</span>
+                                    <span class="text-xs md:text-sm text-gray-500">GBP/VND</span>
+                                </div>
+                                <div class="flex flex-col justify-center items-end">
+                                    <span class="font-semibold text-gray-900 text-sm md:text-base">32,418</span>
+                                    <span class="text-xs md:text-sm text-red-600">-0.05%</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-red-600"><path d="m7 7 10 10"></path><path d="M17 7v10H7"></path></svg>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="mt-6 text-center text-xs text-gray-500" data-i18n="updatedAt">
+                            Cập nhật lúc 10:30 - 24/11/2025 (UTC)
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <button type="submit" class="w-full bg-[#005C75] from-purple-600 to-pink-600 text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition">
-                Tiếp tục chuyển tiền
-              </button>
-            </form>
         </div>
 
-        <!-- Cách thức hoạt động -->
-        <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-6">
-                Cách thức hoạt động
+        <div class="mt-12 bg-white rounded-xl shadow-lg p-6 reveal-up delay-3">
+            <h3 class="text-3xl font-bold text-gray-900 mb-10 text-center" data-i18n="howItWorksTitle">
+                Các bước hoạt động
             </h3>
-            <div class="grid md:grid-cols-3 gap-6 text-center">
+            <div class="grid md:grid-cols-3 gap-6 text-center py-6 px-4">
                 <div>
                     <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 font-bold icon-primary">
                         1
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-2">Nhập thông tin</h4>
-                    <p class="text-sm text-gray-600">
-                        Chọn quốc gia và nhập số tiền cần chuyển
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="step1Title">Nhập thông tin</h4>
+                    <p class="text-sm text-gray-600" data-i18n="step1Desc">
+                        Điền đầy đủ thông tin giao dịch của bạn
                     </p>
                 </div>
                 <div>
                     <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 icon-primary font-bold">
                         2
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-2">Xác nhận</h4>
-                    <p class="text-sm text-gray-600">
-                        Kiểm tra tỷ giá và thông tin người nhận
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="step2Title">Xác nhận</h4>
+                    <p class="text-sm text-gray-600" data-i18n="step2Desc">
+                        Kiểm tra và xác nhận giao dịch của bạn
                     </p>
                 </div>
                 <div>
                     <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 icon-primary font-bold">
                         3
                     </div>
-                    <h4 class="font-semibold text-gray-900 mb-2">Hoàn tất</h4>
-                    <p class="text-sm text-gray-600">
-                        Tiền đến tài khoản người nhận trong 24h
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="step3Title">Hoàn tất</h4>
+                    <p class="text-sm text-gray-600 w-[246px] text-center mx-auto" data-i18n="step3Desc">
+                        Tiền sẽ được chuyển đến người nhận trong thời gian ngắn nhất
                     </p>
                 </div>
             </div>
         </div>
-        </div>
-
-        <!-- Exchange Rates -->
-        <div>
-            <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">
-                    Tỷ giá ngoại tệ hôm nay
-                </h3>
-                <div class="space-y-3">
-                    <div class="rate-card p-4 bg-emerald-50 from-purple-50 to-pink-50 rounded-lg border border-purple-100">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-3">
-                                <div class="text-2xl">USD</div>
-                                <div>
-                                    <div class="font-bold text-gray-900">25,360</div>
-                                    <div class="text-xs text-green-600">+120 (+0.47%)</div>
-                                </div>
-                            </div>
-                            <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
-                        </div>
-                    </div>
-                    <div class="rate-card p-4 bg-gray-50 rounded-lg border">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-3">
-                                <div class="text-2xl">EUR</div>
-                                <div>
-                                    <div class="font-bold text-gray-900">28,150</div>
-                                    <div class="text-xs text-red-600">-85 (-0.30%)</div>
-                                </div>
-                            </div>
-                            <i data-lucide="trending-down" class="w-5 h-5 text-red-600"></i>
-                        </div>
-                    </div>
-                    <div class="rate-card p-4 bg-gray-50 rounded-lg border">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-3">
-                                <div class="text-2xl">SGD</div>
-                                <div>
-                                    <div class="font-bold text-gray-900">19,280</div>
-                                    <div class="text-xs text-green-600">+55 (+0.29%)</div>
-                                </div>
-                            </div>
-                            <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
-                        </div>
-                    </div>
-                    <div class="rate-card p-4 bg-gray-50 rounded-lg border">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-3">
-                                <div class="text-2xl">AUD</div>
-                                <div>
-                                    <div class="font-bold text-gray-900">17,420</div>
-                                    <div class="text-xs text-gray-500">Không đổi</div>
-                                </div>
-                            </div>
-                            <i data-lucide="minus" class="w-5 h-5 text-gray-500"></i>
-                        </div>
-                    </div>
-                    <div class="rate-card p-4 bg-gray-50 rounded-lg border">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center gap-3">
-                                <div class="text-2xl">GBP</div>
-                                <div>
-                                    <div class="font-bold text-gray-900">32,850</div>
-                                    <div class="text-xs text-green-600">+180 (+0.55%)</div>
-                                </div>
-                            </div>
-                            <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6 text-center text-xs text-gray-500">
-                    Cập nhật lúc: 24/11/2025 10:30 AM
-                </div>
-            </div>
-        </div>
-        </div>
 
         <!-- Transaction History -->
         <div class="mt-12 bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-6">Giao dịch gần đây</h3>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <h3 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-i18n="recentTransactionsTitle">Giao dịch gần đây</h3>
+            <div class="">
+                <div class="flex items-center justify-between p-4 rounded-lg">
                     <div class="flex items-center gap-4">
                         <div class="icon-primary icon-primary bg-purple-100 p-2 rounded-lg">
                             <i data-lucide="arrow-right-left" class="w-5 h-5 icon-primary text-purple-600"></i>
@@ -440,106 +542,103 @@
                             <div class="font-medium text-gray-900">
                                 10,000,000 VND → USD
                             </div>
-                            <div class="text-sm text-gray-500">
-                                Đến: John Smith • 21/11/2025
+                            <div class="text-sm text-gray-500 flex flex-col md:flex-row md:items-center md:gap-1" data-i18n="toLabel1">
+                                <span>Đến: John Smith</span>
+                                <span class="hidden md:inline">•</span>
+                                <span>21/11/2025</span>
                             </div>
+
                         </div>
                     </div>
-                    <span class="text-sm px-3 py-1 bg-green-100 text-green-700 rounded-full">Hoàn thành</span
-            >
-          </div>
-          <div
-            class="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
-          >
-            <div class="flex items-center gap-4">
-              <div class="icon-primary bg-purple-100 p-2 rounded-lg">
-                <i
-                  data-lucide="arrow-right-left"
-                  class="w-5 h-5 icon-primary text-purple-600"
-                ></i>
-              </div>
-              <div>
-                <div class="font-medium text-gray-900">5,000,000 VND → EUR</div>
-                <div class="text-sm text-gray-500">
-                  Đến: Marie Dubois • 20/11/2025
-                </div>
-              </div>
-            </div>
-            <span
-              class="text-sm px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full"
-              >Đang xử lý</span
-            >
-          </div>
-          <div
-            class="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
-          >
-            <div class="flex items-center gap-4">
-              <div class="icon-primary bg-purple-100 p-2 rounded-lg">
-                <i
-                  data-lucide="arrow-right-left"
-                  class="w-5 h-5 icon-primary text-purple-600"
-                ></i>
-              </div>
-              <div>
-                <div class="font-medium text-gray-900">500 USD → VND</div>
-                <div class="text-sm text-gray-500">
-                  Đến: Nguyễn Văn A • 19/11/2025
-                </div>
-              </div>
-            </div>
-            <span
-              class="text-sm px-3 py-1 bg-green-100 text-green-700 rounded-full"
-              >Hoàn thành</span
-            >
-          </div>
-        </div>
-      </div>
+                    <!-- DESKTOP -->
+                    <span data-i18n="recentStatusCompleted" class="hidden md:inline-flex text-sm px-3 py-1 bg-green-100 text-green-700 rounded-full">Hoàn thành</span>
 
-      <!-- CTA -->
-      <div
-        class="mt-12 bg-[#005C75] from-purple-600 to-pink-600 rounded-2xl p-8 text-center"
-      >
-        <h2 class="text-white text-3xl font-bold mb-4">Cần hỗ trợ?</h2>
-        <p class="text-purple-100 text-lg mb-6 max-w-2xl mx-auto">
-          Đội ngũ chuyên viên của chúng tôi sẵn sàng hỗ trợ bạn 24/7 với mọi vấn
-          đề về chuyển tiền quốc tế
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <button
-            class="bg-white text-[#005C75] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition"
-          >
-            Chat ngay
-          </button>
-          <button
-            class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition"
-          >
-            Gọi hotline
-          </button>
+                    <!-- MOBILE -->
+                    <img src="./assets/images/icon/tick.png" alt="" class="w-6 h-6 md:hidden" />
+
+                </div>
+                <hr>
+                <div class="flex items-center justify-between p-4 rounded-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="icon-primary bg-purple-100 p-2 rounded-lg">
+                            <i data-lucide="arrow-right-left" class="w-5 h-5 icon-primary text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">5,000,000 VND → EUR</div>
+
+                            <div class="text-sm text-gray-500 flex flex-col md:flex-row md:items-center md:gap-1" data-i18n="toLabel2">
+                                <span>Đến: Marie Dubois</span>
+                                <span class="hidden md:inline">•</span>
+                                <span>20/11/2025</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <span data-i18n="recentStatusProcessing" class="hidden md:inline-flex text-sm px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full">Đang xử lý</span>
+                    <img src="./assets/images/icon/refresh.png" alt="" class="w-6 h-6 md:hidden" />
+                </div>
+                <hr>
+                <div class="flex items-center justify-between p-4 rounded-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="icon-primary bg-purple-100 p-2 rounded-lg">
+                            <i data-lucide="arrow-right-left" class="w-5 h-5 icon-primary text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">500 USD → VND</div>
+
+                            <div class="text-sm text-gray-500 flex flex-col md:flex-row md:items-center md:gap-1" data-i18n="toLabel3">
+                                <span>Đến: Nguyễn Văn A</span>
+                                <span class="hidden md:inline">•</span>
+                                <span>19/11/2025</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- DESKTOP -->
+                    <span data-i18n="recentStatusCompleted" class="hidden md:inline-flex text-sm px-3 py-1 bg-green-100 text-green-700 rounded-full">Hoàn thành</span>
+
+                    <!-- MOBILE -->
+                    <img src="./assets/images/icon/tick.png" alt="" class="w-6 h-6 md:hidden" />
+                </div>
+                <hr>
+            </div>
         </div>
-      </div>
+
+        <!-- CTA -->
+        <div class="mt-12 from-purple-600 to-pink-600 rounded-2xl p-8 text-center reveal-up delay-4">
+            <h2 class="text-[#212529] text-3xl font-bold mb-4" data-i18n="needHelpTitle">Cần hỗ trợ?</h2>
+            <p class="text-[#212529] text-lg mb-6 mx-auto" data-i18n="needHelpDesc">
+                Đội ngũ chuyên viên của chúng tôi sẵn sàng hỗ trợ bạn 24/7 với mọi vấn đề về chuyển tiền quốc tế
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button class="bg-[#005C75] text-white px-8 py-4 rounded-lg font-nomal" data-i18n="chatNowBtn">Chat ngay</button>
+                <button class="text-[#005C75] px-8 py-4 font-nomalunderline underline underline-offset-4" data-i18n="callHotlineBtn"> Gọi hotline</button>
+
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
-    <<footer class="bg-[#002B36] text-gray-300 py-12">
+    <footer class="bg-[#001A21] text-gray-300 py-12">
         <div class="max-w-7xl mx-auto px-6">
             <!-- Cột chính: mobile 1 cột, căn giữa; desktop 3 cột -->
             <div class="grid grid-cols-1 lg:grid-cols-[6fr_3fr_3fr] gap-4 lg:gap-40 mb-8 justify-items-center lg:justify-items-start text-center lg:text-left">
                 <!-- Cột 1: Logo + Mô tả -->
                 <div class="lg:col-span-1">
                     <div class="flex justify-center lg:justify-start items-center gap-4 mb-6">
-                        <img src="./assets/images/logo-remex.png" alt="Remex" class="h-12">
+                        <img src="./assets/images/logo-remex.png" alt="Remex GPS" class="h-12">
                     </div>
                     <p class="text-sm leading-relaxed" data-i18n="footerDesc">
-                        Remex là nền trung gian thanh toán xuyên biên giới đáng tin cậy, giúp chuyển tiền từ nước ngoài đến người nhận tại Việt Nam một cách an toàn và hợp pháp.
+                        Remex GPS là nền trung gian thanh toán xuyên biên giới đáng tin cậy, giúp chuyển tiền từ nước ngoài đến người nhẫn tại Việt Nam một cách an toàn và hợp pháp.
                     </p>
                 </div>
                 <!-- Cột 2: Công ty -->
                 <div>
                     <h4 class="text-white font-semibold text-lg mb-6" data-i18n="company">Công ty</h4>
                     <ul class="space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-green-400 transition" data-i18n="about">Về Remex</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition" data-i18n="recruitment">Tuyển dụng</a></li>
-                        <li><a href="#" class="hover:text-green-400 transition" data-i18n="news">Tin tức</a></li>
+                        <li><a href="about.html" class="hover:text-green-400 transition" data-i18n="about">Về Remex GPS</a></li>
+                        <li><a href="recruitment.html" class="hover:text-green-400 transition" data-i18n="recruitment">Tuyển dụng</a></li>
+                        <li><a href="news.html" class="hover:text-green-400 transition" data-i18n="news">Tin tức</a></li>
                     </ul>
                 </div>
                 <!-- Cột 3: Sản phẩm -->
@@ -561,14 +660,27 @@
                             <i class="fas fa-phone-alt text-green-400"></i>
                             <span data-i18n="hotline">Hotline: 1900-xxx</span>
                         </li>
-                        <li class="flex items-center justify-center gap-3 w-full md:w-auto">
-                            <i class="fab fa-zalo text-green-400 text-xl"></i>
-                            <a href="#" class="hover:text-green-400 transition" data-i18n="zalosupport">Zalo Support</a>
+                        <!-- group icon -->
+                        <li class="w-full md:w-auto">
+                            <div class="flex justify-center gap-6 md:gap-4">
+                                <a href="https://www.linkedin.com/company/remex-global-payment-services-jsc" target="_blank" rel="noopener noreferrer" aria-label="linkedin">
+                                    <img src="./assets/images/icon/lin.png" class="w-[20px] h-[20px]">
+                                </a>
+
+                                <a href="https://www.facebook.com/remex.vn" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <img src="./assets/images/logo/logo-fb.png" class="w-[20px] h-[20px]">
+                                </a>
+
+                                <!-- <a href="#" aria-label="Zalo Support">
+                                    <img src="./assets/images/icon/Zaloo.png" class="w-[20px] h-[20px]">
+                                </a>
+
+                                <a href="#" aria-label="WhatsApp Support">
+                                    <img src="./assets/images/icon/whatapp.png" class="w-[20px] h-[20px]">
+                                </a> -->
+                            </div>
                         </li>
-                        <li class="flex items-center justify-center gap-3 w-full md:w-auto">
-                            <i class="fab fa-whatsapp text-green-400 text-xl"></i>
-                            <a href="#" class="hover:text-green-400 transition" data-i18n="whatsappsupport">WhatsApp Support</a>
-                        </li>
+
                     </ul>
 
                 </div>
@@ -576,7 +688,8 @@
 
             <!-- Dòng dưới cùng -->
             <div class="flex flex-col md:flex-row justify-center md:justify-between items-center text-sm text-center md:text-left">
-                <p data-i18n="copyright">© 2025 Remex.vn. All rights reserved.</p>
+                <p id="copyright">© <span id="year"></span> Remex.vn. All rights reserved.</p>
+
                 <div class="flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 justify-center md:justify-start">
                     <a href="privacy.html" class="hover:text-green-400 transition" data-i18n="privacy">Chính sách bảo mật</a>
                     <a href="terms.html" class="hover:text-green-400 transition" data-i18n="terms">Điều khoản dịch vụ</a>
@@ -585,6 +698,12 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+
 
     <script>
         lucide.createIcons();
@@ -605,5 +724,31 @@
 
         lucide.createIcons();
     </script>
-  </body>
+    <script>
+        // Prevent automatic scroll restoration that can hide anchor targets
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+        function adjustHashScroll() {
+            if (!location.hash) return;
+            var id = location.hash.slice(1);
+            var el = document.getElementById(id) || document.querySelector('[name="' + id + '"]');
+            if (!el) return;
+            var header = document.querySelector('nav') || document.querySelector('header');
+            var offset = header ? header.offsetHeight : 80;
+            var elTop = el.getBoundingClientRect().top + window.scrollY;
+            // small timeout so this runs after the browser's native jump on load
+            setTimeout(function() {
+                window.scrollTo({
+                    top: Math.max(0, elTop - offset),
+                    behavior: 'auto'
+                });
+            }, 50);
+        }
+
+        window.addEventListener('load', adjustHashScroll);
+        window.addEventListener('hashchange', adjustHashScroll);
+    </script>
+    <script src="./assets/js/animation.js"></script>
+</body>
+
 </html>

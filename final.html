@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remex GPS.vn - Về chúng tôi</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+    <!-- CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/about.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/animation.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.379.0/lucide.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Scripts cần thiết (jQuery phải load trước) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/language.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .stats-badge {
+            background: rgba(34, 197, 94, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-x-hidden">
+    <nav class="bg-[#001A21] fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="./assets/images/logo-remex.png" alt="Remex GPS" class="h-9"></a>
+            </div>
+            <!-- Desktop Menu - Fixed gap 88px để khớp chính xác devtools -->
+            <div class="hidden lg:flex items-center gap-[50px] text-base font-medium leading-6"><a href="index.html" class="text-white hover:text-green-400 transition" data-i18n="home">Trang chủ</a>
+                <!-- <a href="remittance.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="remittance">Chuyển tiền & Ngoại hối</span></a> -->
+                <div class="relative group">
+                    <a href="#" class="text-white hover:text-green-400 transition flex items-center gap-1">
+                        <span data-i18n="fund">Giải pháp dịch vụ</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </a>
+
+                    <!-- Sub menu -->
+                    <div class="absolute top-full left-0 mt-2 w-56 bg-[#001A21] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+
+                        <a href="cross.html" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition" data-i18n="fund_cross_border">
+                        Cross border payment
+                    </a>
+
+                        <a href="fund.html" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition" data-i18n="fund_management">
+                        Fund Management
+                    </a>
+
+                        <a href="final.html" class="block px-4 py-2 text-white hover:bg-[#004050] hover:text-white transition" data-i18n="fund_consulting">
+                        Consulting
+                    </a>
+                    </div>
+                </div>
+
+                <a href="about.html" class="text-white hover:text-green-400 transition" data-i18n="about">Về Remex GPS</a>
+                <a href="support.html" class="text-white hover:text-green-400 transition flex items-center gap-1"><span data-i18n="support">Hỗ trợ</span></a>
+            </div>
+            <!-- Right Side: Language + Buttons -->
+            <div class="flex items-center gap-4">
+                <!-- Language Selector Dropdown -->
+                <div class="hidden md:block relative group">
+                    <!-- <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-r border-white/30" data-lang-selector> -->
+                    <button class="flex items-center gap-1 text-white hover:text-green-400 transition pr-4 border-white/30" data-lang-selector>
+                        <img src="https://flagcdn.com/24x18/vn.png" alt="Language" class="w-6 h-4"><i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="hidden absolute right-0 mt-0 w-48 bg-[#003746] border border-white/20 rounded-lg shadow-lg group-hover:block z-50">
+                        <button onclick="setLanguage('vi')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
+              <img src="https://flagcdn.com/24x18/vn.png" alt="Tiếng Việt" class="w-5 h-4"><span>Tiếng Việt</span>
+            </button>
+                        <button onclick="setLanguage('en')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3 border-b border-white/10">
+              <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="w-5 h-4"><span>English</span>
+            </button>
+                        <button onclick="setLanguage('ja')" class="w-full text-left px-4 py-3 text-white hover:bg-green-500 transition flex items-center gap-3">
+              <img src="https://flagcdn.com/24x18/jp.png" alt="日本語" class="w-5 h-4"><span>日本語</span>
+            </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                  </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (giữ đồng nhất như trước) -->
+        <div id="mobile-menu" class="hidden lg:hidden
+           bg-[#001A21]
+           border-t border-white/10
+           min-h-screen
+           h-screen
+           overflow-y-auto">
+
+            <a href="index.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="home">
+        Trang chủ
+    </a>
+
+            <!-- <a href="remittance.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="remittance">
+        Chuyển tiền & Ngoại hối
+    </a> -->
+
+            <!-- ===== FUND MENU ===== -->
+            <div class="border-b border-white/10">
+
+                <!-- Menu cha -->
+                <button type="button" onclick="toggleFundMenu()" class="w-full flex items-center justify-between
+                   text-white px-6 py-4 hover:bg-white/5 transition">
+
+            <span data-i18n="fund">Giải pháp dịch vụ</span>
+
+            <!-- icon -->
+            <svg id="fund-arrow"
+                 class="w-4 h-4 transition-transform duration-200"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+                <!-- Sub menu -->
+                <div id="fund-submenu" class="hidden bg-[#001A21]">
+
+                    <a href="cross.html" class="block pl-12 pr-6 py-3 text-white text-sm hover:bg-white/5 transition" data-i18n="fund_cross_border">
+                Cross border payment
+            </a>
+
+                    <a href="fund.html" class="block pl-12 pr-6 py-3 text-white text-sm hover:bg-white/5 transition" data-i18n="fund_management">
+                Fund Management
+            </a>
+
+                    <a href="final.html" class="block pl-12 pr-6 py-3 text-white text-sm hover:bg-white/5 transition" data-i18n="fund_consulting">
+                Consulting
+            </a>
+                </div>
+            </div>
+            <!-- ===== END FUND MENU ===== -->
+
+            <a href="about.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="about">
+        Về Remex GPS
+    </a>
+
+            <a href="support.html" class="block text-white px-6 py-4 border-b border-white/10 hover:bg-white/5 transition" data-i18n="support">
+        Hỗ trợ
+    </a>
+
+            <!-- ===== LANGUAGE ===== -->
+            <div class="px-6 py-4 border-b border-white/10">
+
+                <p class="text-white/70 text-sm mb-3" data-i18n="language">
+                    Ngôn ngữ
+                </p>
+
+                <div class="space-y-2">
+
+                    <button onclick="setLanguage('vi')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/vn.png" class="w-5 h-4">
+                <span>Tiếng Việt</span>
+            </button>
+
+                    <button onclick="setLanguage('en')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/gb.png" class="w-5 h-4">
+                <span>English</span>
+            </button>
+
+                    <button onclick="setLanguage('ja')" class="w-full flex items-center gap-2 text-white hover:text-green-400 transition py-2">
+                <img src="https://flagcdn.com/24x18/jp.png" class="w-5 h-4">
+                <span>日本語</span>
+            </button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </nav>
+    <section class="py-20 bg-gradient-to-br from-white to-blue-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Tiêu đề section -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-teal-900 mb-4" data-i18n="consulting_title">Tư vấn Doanh nghiệp & Giải pháp Pháp lý Quy định</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-i18n="consulting_subtitle">
+                    Định hướng thành công trong môi trường pháp lý phức tạp với đội ngũ chuyên gia hàng đầu
+                </p>
+                <div class="w-32 h-1 bg-gradient-to-r from-green-400 to-teal-500 mx-auto rounded-full mt-6"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-teal-100 flex flex-col text-left">
+                    <div class="flex items-center gap-4 mb-6">
+                        <i data-lucide="rocket" class="w-16 h-16 text-green-600 flex-shrink-0"></i>
+                        <h3 class="text-2xl font-bold text-teal-800" data-i18n="entry_strategy_title">Chiến lược Gia nhập & Bản địa hóa</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-i18n="entry_strategy_desc">
+                        Việc điều hướng trong bối cảnh pháp lý tại Việt Nam đòi hỏi hiểu sâu về môi trường quy định và cách bản địa hóa mô hình kinh doanh quốc tế.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="regulatory_feasibility">Báo cáo khả thi pháp lý (Regulatory Feasibility Studies)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="market_entry_roadmap">Lộ trình gia nhập thị trường cho các tập đoàn quốc tế</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="localization_business_model">Bản địa hóa mô hình kinh doanh quốc tế</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="sustainable_compliance">Đảm bảo tuân thủ với quy định mà vẫn giữ lợi thế cạnh tranh</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-teal-100 flex flex-col text-left">
+                    <div class="flex items-center gap-4 mb-6">
+                        <i data-lucide="alert-triangle" class="w-16 h-16 text-amber-600 flex-shrink-0"></i>
+                        <h3 class="text-2xl font-bold text-amber-800" data-i18n="crisis_management_title">Quản trị Khủng hoảng & Giải pháp Tức thời</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-i18n="crisis_management_desc">
+                        Đối phó với các thách thức pháp lý đột ngột, cấp phép chậm trễ, hoặc khủng hoảng quy định.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="rapid_response">Phản ứng nhanh với các thay đổi pháp lý</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="licensing_hurdles">Giải quyết rào cản cấp phép hoặc thanh tra đột xuất</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="crisis_legal_support">Tư vấn khủng hoảng pháp lý</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-amber-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="business_continuity">Duy trì hoạt động kinh doanh liên tục trong giai đoạn nhạy cảm</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-teal-100 flex flex-col text-left">
+                    <div class="flex items-center gap-4 mb-6">
+                        <i data-lucide="shield-check" class="w-16 h-16 text-blue-600 flex-shrink-0"></i>
+                        <h3 class="text-2xl font-bold text-blue-800" data-i18n="compliance_health_title">Duy trì Sức khỏe Tuân thủ</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6" data-i18n="compliance_health_desc">
+                        Hạn chế rủi ro pháp lý lâu dài, xây dựng nền tảng tuân thủ vững chắc cho sự phát triển bền vững.
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="compliance_audit">Rà soát tuân thủ định kỳ</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="regulatory_training">Cập nhật và đào tạo tuân thủ cho nhân sự</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="solid_legal_foundation">Xây dựng nền tảng pháp lý vững chắc</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 flex-shrink-0 mt-1"></i>
+                            <span data-i18n="future_proof_compliance">Hỗ trợ hoạt động trong môi trường quy định tương lai</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <div class="flex justify-center lg:justify-end">
+                    <div class="relative w-full max-w-lg">
+                        <img src="./assets/images/protect-business-illustration.png" alt="Bảo vệ và phát triển doanh nghiệp" class="w-full h-auto rounded-3xl shadow-2xl object-cover" data-i18n="protect_growth_image_alt">
+
+                    </div>
+                </div>
+                <div class="text-center lg:text-left">
+                    <h2 class="text-4xl md:text-5xl font-bold text-teal-900 mb-6" data-i18n="protect_growth_title">
+                        BẢO VỆ & PHÁT TRIỂN DOANH NGHIỆP CỦA BẠN
+                    </h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-10" data-i18n="protect_growth_desc">
+                        Với kinh nghiệm sâu rộng về pháp luật Việt Nam và các quy định quốc tế, Remex GPS đảm bảo doanh nghiệp của bạn luôn tuân thủ đầy đủ quy định pháp lý trong khi đã có cơ hội tăng trưởng tối ưu hóa hội nhập.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-md mx-auto lg:mx-0">
+                        <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-8 shadow-lg border border-green-100 text-center">
+                            <p class="text-5xl md:text-6xl font-extrabold text-green-600 mb-2" data-i18n="stats_businesses">200+</p>
+                            <p class="text-lg font-semibold text-gray-800" data-i18n="stats_businesses_label">Doanh nghiệp được tư vấn</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-8 shadow-lg border border-green-100 text-center">
+                            <p class="text-5xl md:text-6xl font-extrabold text-green-600 mb-2" data-i18n="stats_compliance">100%</p>
+                            <p class="text-lg font-semibold text-gray-800" data-i18n="stats_compliance_label">Tỉ lệ tuân thủ</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-b from-[#003443] to-[#004050] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide mb-4" data-i18n="ma_title">
+                    TƯ VẤN MUA BÁN & SÁP NHẬP CHIẾN LƯỢC
+                </h2>
+                <p class="text-xl md:text-2xl opacity-90 max-w-4xl mx-auto" data-i18n="ma_subtitle">
+                    Tư vấn toàn diện cho các thương vụ M&A giúp lập kế hoạch đến thực thi thành công
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 hover:border-green-400/50 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center">
+                            <i data-lucide="target" class="w-8 h-8 text-green-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold" data-i18n="ma_card1_title">Tư vấn định giá & toàn diện</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6" data-i18n="ma_card1_desc">
+                        Tận dụng mạng lưới đối tác để đánh giá toàn diện các thương vụ M&A và sáp nhập.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card1_1">Tư vấn tài chính chuyên sâu (Deep Market Insights)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card1_2">Định giá tài sản & doanh nghiệp (Buy-side / Sell-side)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card1_3">Bình luận dòng vốn & nguồn vốn (Capital Arrangement)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card1_4">Hỗ trợ đến khi đóng giao dịch (Closing)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 hover:border-green-400/50 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center">
+                            <i data-lucide="search" class="w-8 h-8 text-green-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold" data-i18n="ma_card2_title">Tiếp cận thương vụ độc quyền & sàng lọc</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6" data-i18n="ma_card2_desc">
+                        Giải quyết vấn đề bất cân xứng thông tin trong thương vụ bằng cách tiếp cận độc quyền.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card2_1">Tiếp cận nguồn thương vụ độc quyền (Proprietary Deal Flow)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card2_2">Tiếp cận mục tiêu tiềm năng (Implant Targets)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card2_3">Sàng lọc chiến lược (Strategic Fit) và off-market deals</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 hover:border-green-400/50 transition-all duration-300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center">
+                            <i data-lucide="handshake" class="w-8 h-8 text-green-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold" data-i18n="ma_card3_title">Thẩm định thương mại & hiện thực hóa cộng hưởng</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6" data-i18n="ma_card3_desc">
+                        Không chỉ dừng lại ở việc ký kết, chúng tôi hỗ trợ thực thi giá trị sau sáp nhập.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-200">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card3_1">Thẩm định chi tiết (Due Diligence)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card3_2">Chiến lược tích hợp sau sáp nhập (Post-Merger Integration - PMI)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-green-400 mt-1"></i>
+                            <span data-i18n="ma_card3_3">Hiện thực hóa cộng hưởng (Synergy Realization)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16">
+                <div class="grid lg:grid-cols-2 gap-0">
+                    <div class="p-10 md:p-12 lg:p-16">
+                        <h3 class="text-4xl md:text-5xl font-bold text-white mb-8 tracking-wide" data-i18n="optimization_title">
+                            TỐI ƯU HÓA GIÁ TRỊ THƯƠNG VỤ
+                        </h3>
+
+                        <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-10" data-i18n="optimization_desc">
+                            Tối ưu hóa mục tiêu mua bán và tích hợp sau sáp nhập.<br> Chúng tôi đồng hành cùng bạn trong mọi bước để đảm bảo giá trị M&A đạt được tối đa.
+                        </p>
+                        <div class="space-y-8">
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 rounded-xl bg-green-600/30 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="scale" class="w-8 h-8 text-green-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white mb-2" data-i18n="opt_item1_title">Định giá chính xác</h4>
+                                    <p class="text-gray-300" data-i18n="opt_item1_desc">
+                                        Phương pháp định giá phù hợp nhất, đảm bảo giá trị thực tế của thương vụ.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 rounded-xl bg-green-600/30 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="handshake" class="w-8 h-8 text-green-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white mb-2" data-i18n="opt_item2_title">Chiến lược đàm phán</h4>
+                                    <p class="text-gray-300" data-i18n="opt_item2_desc">
+                                        Phương pháp đàm phán chuyên sâu để đạt điều khoản tốt nhất cho cả hai bên.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-6">
+                                <div class="w-14 h-14 rounded-xl bg-green-600/30 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="bar-chart-3" class="w-8 h-8 text-green-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-white mb-2" data-i18n="opt_item3_title">Tối ưu hóa giá trị dài hạn</h4>
+                                    <p class="text-gray-300" data-i18n="opt_item3_desc">
+                                        Tối ưu hóa synergy sau thương vụ, hiện thực hóa giá trị thực tế lâu dài.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 backdrop-blur-sm flex items-center justify-center min-h-[400px] lg:min-h-full">
+                        <div class="text-center text-gray-400">
+                            <div class="relative w-full max-w-lg">
+                                <img src="./assets/images/protect-business-illustration.png" alt="Bảo vệ và phát triển doanh nghiệp" class="w-full h-auto rounded-3xl shadow-2xl object-cover" data-i18n="protect_growth_image_alt">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="py-16 md:py-24 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-[#10b981]/90 rounded-3xl overflow-hidden shadow-2xl">
+                <div class="grid lg:grid-cols-2 gap-0 items-center">
+                    <div class="p-10 md:p-16 lg:p-20">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" data-i18n="cta_title">
+                            BẮT ĐẦU HÀNH TRÌNH TƯ VẤN NGAY HÔM NAY
+                        </h2>
+
+                        <p class="text-lg md:text-xl opacity-95 leading-relaxed mb-10" data-i18n="cta_desc">
+                            Đăng ký tư vấn miễn phí với các chuyên gia của Remex GPS để hiểu rõ cách hỗ trợ doanh nghiệp của bạn đạt được mục tiêu chiến lược.
+                        </p>
+
+                        <a href="support.html" class="inline-block bg-white text-[#10b981] font-bold text-lg md:text-xl py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                Đặt Lịch Ngay
+            </a>
+                    </div>
+                    <div class="bg-[#059669]/30 backdrop-blur-sm min-h-[400px] lg:min-h-full flex items-center justify-center">
+                        <div class="w-64 h-64 md:w-80 h-80 border-4 border-dashed border-white/40 rounded-3xl flex items-center justify-center">
+                            <div class="relative w-full max-w-lg">
+                                <img src="./assets/images/protect-business-illustration.png" alt="Bảo vệ và phát triển doanh nghiệp" class="w-full h-auto rounded-3xl shadow-2xl object-cover" data-i18n="protect_growth_image_alt">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#001A21] text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-[6fr_3fr_3fr] gap-4 lg:gap-40 mb-8 justify-items-center lg:justify-items-start text-center lg:text-left">
+                <div class="lg:col-span-1">
+                    <div class="flex justify-center lg:justify-start items-center gap-4 mb-6">
+                        <img src="./assets/images/logo-remex.png" alt="Remex GPS" class="h-12">
+                    </div>
+                    <p class="text-sm leading-relaxed" data-i18n="footerDesc">
+                        Remex GPS là nền trung gian thanh toán xuyên biên giới đáng tin cậy, giúp chuyển tiền từ nước ngoài đến người nhẫn tại Việt Nam một cách an toàn và hợp pháp.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6" data-i18n="company">Công ty</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="about.html" class="hover:text-green-400 transition" data-i18n="about">Về Remex GPS</a></li>
+                        <li><a href="recruitment.html" class="hover:text-green-400 transition" data-i18n="recruitment">Tuyển dụng</a></li>
+                        <li><a href="news.html" class="hover:text-green-400 transition" data-i18n="news">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-6" data-i18n="products">Sản phẩm</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="cross" class="hover:text-green-400 transition" data-i18n="fund_cross_border">Thanh toán xuyên biên giới</a></li>
+                        <li><a href="fund.html" class="hover:text-green-400 transition" data-i18n="fund">Quản lý quỹ</a></li>
+                        <li><a href="final" class="hover:text-green-400 transition" data-i18n="fund_consulting">Tư vấn tài chính</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="w-full mb-8 text-center lg:text-left">
+                <div class="rounded-lg">
+                    <h4 class="text-white font-semibold text-lg mb-6" data-i18n="support">Hỗ trợ</h4>
+                    <ul class="flex flex-col md:flex-row gap-6 w-full text-center md:text-left items-center md:items-start">
+                        <li class="flex items-center justify-center w-full md:w-auto">
+                            <i class="fas fa-phone-alt text-green-400"></i>
+                            <span data-i18n="hotline">Hotline: 1900-xxx</span>
+                        </li>
+                        <li class="w-full md:w-auto">
+                            <div class="flex justify-center gap-6 md:gap-4">
+                                <a href="https://www.linkedin.com/company/remex-global-payment-services-jsc" target="_blank" rel="noopener noreferrer" aria-label="linkedin">
+                                    <img src="./assets/images/icon/lin.png" class="w-[20px] h-[20px]">
+                                </a>
+
+                                <a href="https://www.facebook.com/remex.vn" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <img src="./assets/images/logo/logo-fb.png" class="w-[20px] h-[20px]">
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center md:justify-between items-center text-sm text-center md:text-left">
+                <p id="copyright">© <span id="year"></span> Remex.vn. All rights reserved.</p>
+                <div class="flex flex-col md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 justify-center md:justify-start">
+                    <a href="privacy.html" class="hover:text-green-400 transition" data-i18n="privacy">Chính sách bảo mật</a>
+                    <a href="terms.html" class="hover:text-green-400 transition" data-i18n="terms">Điều khoản dịch vụ</a>
+                    <a href="compliance.html" class="hover:text-green-400 transition" data-i18n="complianceLink">Tuân thủ pháp luật</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const svg = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        });
+
+        lucide.createIcons();
+    </script>
+    <script src="./assets/js/custom.js"></script>
+    <script src="./assets/js/animation.js"></script>
+    <script>
+        const track = document.getElementById('logoTrack');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
+
+        const totalItems = track.children.length;
+        let index = 0;
+
+        function update() {
+            track.style.transform = `translateX(-${index * 50}%)`;
+        }
+
+        next.addEventListener('click', () => {
+            if (index < totalItems - 2) {
+                index++;
+                update();
+            }
+        });
+
+        prev.addEventListener('click', () => {
+            if (index > 0) {
+                index--;
+                update();
+            }
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.social-link').forEach(link => {
+            if (link.dataset.disabled === 'false') {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    window.open(link.href, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
