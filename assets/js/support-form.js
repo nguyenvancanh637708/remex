@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hiển thị tên file khi người dùng chọn file
     if (fileInput && fileNameDisplay) {
-        fileInput.addEventListener('change', function (e) {
+        fileInput.addEventListener('change', function(e) {
             if (this.files && this.files.length > 0) {
                 // Rút gọn tên file nếu quá dài
                 let fileName = this.files[0].name;
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    supportForm.addEventListener('submit', async (e) => {
+    supportForm.addEventListener('submit', async(e) => {
         e.preventDefault();
 
         // 1. Chuẩn bị UI
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Gọi API
         try {
-            const response = await fetch('http://10.12.20.60:8082/api/v1/support/tickets', {
+            const response = await fetch('http://10.12.20.60:8091/api/v1/support/tickets', {
                 method: 'POST',
                 // Không set Content-Type: multipart/form-data. Trình duyệt sẽ tự động set khi dùng FormData và sinh ra boundary đúng
                 body: formData

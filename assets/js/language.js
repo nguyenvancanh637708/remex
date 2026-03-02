@@ -202,7 +202,7 @@ const translations = {
         step4Desc: "Người nhận nhận tiền trực tiếp vào tài khoản tại Việt Nam.",
 
         // Team Section
-        team_title: "Team Work",
+        team_title: "Đội ngũ",
         team_desc: "Những chuyên gia tận tâm xây dựng cầu nối tài chính cho cộng đồng người Việt toàn cầu",
 
         team_role_ceo: "CEO & Founder",
@@ -224,7 +224,7 @@ const translations = {
         team_member_galym_name: "Ông Galym Kalmenov",
         team_member_galym_title: "Giám Đốc Công Nghệ",
 
-        team_member_kosuke_name: "Ông Kosuke Tankehara",
+        team_member_kosuke_name: "Ông Kosuke Takehara",
         team_member_kosuke_title: "Giám Đốc Phát Triển Kinh Doanh",
 
         team_member_kenny_name: "Ông Kenny Chiang",
@@ -525,8 +525,8 @@ const translations = {
         placeholder_phone: "+84 xxx xxx xxx",
         label_request_type: "Loại yêu cầu",
         option_select_request: "Chọn loại yêu cầu",
-        option_transaction: "Hỗ trợ giao dịch",
-        option_kyc: "Tài khoản & KYC",
+        option_transaction: "Tư vấn, hỗ trợ về Dịch Vụ Thanh Toán Toàn Cầu",
+        option_kyc: "Tư vấn, hỗ trợ về Dịch Vụ Quỹ Đầu Tư Toàn Cầu",
         option_business: "Đối tác & doanh nghiệp",
         option_legal: "Pháp lý & tuân thủ",
         option_other: "Khác",
@@ -949,7 +949,7 @@ const translations = {
         team_member_galym_name: "Mr. Galym Kalmenov",
         team_member_galym_title: "Chief Technology Officer",
 
-        team_member_kosuke_name: "Mr. Kosuke Tankehara",
+        team_member_kosuke_name: "Mr. Kosuke Takehara",
         team_member_kosuke_title: "Business Development Director",
 
         team_member_kenny_name: "Mr. Kenny Chiang",
@@ -1330,8 +1330,8 @@ const translations = {
         placeholder_phone: "+84 xxx xxx xxx",
         label_request_type: "Request type",
         option_select_request: "Select request type",
-        option_transaction: "Dedicated Support",
-        option_kyc: "Account & KYC",
+        option_transaction: "Consultation and support for Global Payment Services",
+        option_kyc: "Consultation and support for Global Private Fund Services",
         option_business: "Partners & Business",
         option_legal: "Legal & Compliance",
         option_other: "Other",
@@ -1981,7 +1981,7 @@ const translations = {
         team_member_galym_name: "Galym Kalmenov",
         team_member_galym_title: "最高技術責任者 (CTO)",
 
-        team_member_kosuke_name: "Kosuke Tankehara", // Hoặc 竹原 康介
+        team_member_kosuke_name: "Kosuke Takehara", // Hoặc 竹原 康介
         team_member_kosuke_title: "事業開発ディレクター",
 
         team_member_kenny_name: "Kenny Chiang",
@@ -2125,8 +2125,8 @@ const translations = {
         placeholder_phone: "+84 xxx xxx xxx",
         label_request_type: "リクエストタイプ",
         option_select_request: "リクエストタイプを選択",
-        option_transaction: "専任サポート",
-        option_kyc: "アカウント & KYC",
+        option_transaction: "グローバル決済サービスに関するご相談・サポート",
+        option_kyc: "グローバル投資信託サービスに関するご相談・サポート",
         option_business: "パートナー & ビジネス",
         option_legal: "法務 & コンプライアンス",
         option_other: "その他",
